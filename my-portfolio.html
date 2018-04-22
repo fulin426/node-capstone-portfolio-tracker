@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Portfolio Tracker</title>
+	<title>Portfolio Tracker My Portfolio</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
 	<link href="index.css" rel="stylesheet" type="text/css" />
@@ -12,9 +12,9 @@
 			<li class="nav-item">
 			<a href= "#" class="nav_link" id="home-link">Home</a>
 			</li>
-			<li class="nav-item">
+<!-- 			<li class="nav-item">
 			<a href="#" class="nav-link" id="sign-up">Log In</a>
-			</li>
+			</li> -->
 		</ul>
 	</div>
 <nav>
@@ -22,16 +22,20 @@
 	<main>
 		<form>
 			<fieldset class="add-asset-form">
-				<legend>Add New Asset</legend>
-				<div class="add-name">
-					<label>Name</label>
-					<input placeholder="Vanguard SP 500" required/>
+				<p id="add-new-asset">Add New Asset</p>
+				<div class="add name-container">
+					<label class="new name">Name</label>
+					<input class="name-input" placeholder="Vanguard SP 500" required/>
 				</div>
-				<label>Current Value:</label>
-				<input placeholder="88000" required/>
-				<label>Target Value:</label>
-				<input placeholder="20%" required/>
-				<button>Add</button>
+				<div class="add current-container">
+					<label class="new current">Current Value:</label>
+					<input class="value-input" placeholder="88000" required/>
+				</div>
+				<div class="add target-container">
+					<label class="new target">Target Value:</label>
+					<input class="target-input" placeholder="20%" required/>
+				</div>
+				<button class="add-button">Add</button>
 			</fieldset>
 		</form>
 	</main>	

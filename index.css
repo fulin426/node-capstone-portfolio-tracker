@@ -136,7 +136,56 @@ legend {
 
 /*Portfolio Page*/
 /*Add form*/
-
 .add-asset-form {
-	
+	background-color: #E8E8E8;
+	height: 100px;
+	width: 780px;
+	padding: 10px;
+	margin: 30px auto;
+	border-radius: 4px;
+}
+
+#add-new-asset {
+	font-size: 20px;
+	margin-bottom: 8px;
+}
+
+.add {
+	display: inline-block;
+}
+
+.new {
+	display: block;
+}
+
+.add-button {
+    width: 85px;
+    height: 32px;
+    margin-left: 18px;
+    background-color: #A9A9A9;
+    border-radius: 3px;
+}
+
+.name-container{
+
+}
+
+.target-container { 
+	margin-left: 30px;
+}
+
+.current-container {
+	margin-left: 30px
+}
+
+.name-input {
+	width: 260px;
+}
+
+.value-input {
+	width: 116px;
+}
+
+.target-input {
+	width: 116px;
 }

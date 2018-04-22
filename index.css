@@ -1,0 +1,86 @@
+/*reset default styles*/
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	box-sizing: border-box;
+	font-family: Sans-Serif;
+	/*reset Chrome user agent styles*/
+	-webkit-margin-before: 0px;
+	-webkit-margin-after: 0px;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	-webkit-padding-before: 0px;
+	-webkit-padding-after: 0px;
+	-webkit-padding-start: 0px;
+	-webkit-padding-end: 0px;
+	/*reset Firefox user agent styles*/
+	-moz-margin-before: 0px;
+	-moz-margin-after: 0px;
+	-moz-margin-start: 0px;
+	-moz-margin-end: 0px;
+	-moz-padding-before: 0px;
+	-moz-padding-after: 0px;
+	-moz-padding-start: 0px;
+	-moz-padding-end: 0px;
+}
+
+/*navigation bar*/
+.nav-bar {
+	width: 100%;
+	height: 60px;
+	background-color: lightgrey;
+	color: red;
+	margin: 0 auto;
+	padding left: 25px;
+	padding right: 25px;
+	display: fixed;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    display: inline;
+    line-height: 51px;
+    font-size: 20px;
+}
+
+#home-link{
+	padding-left: 25px;
+}
+#sign-up {
+	float: right;
+	padding-right: 25px;
+}
+
+/*sign up portion*/
+.main-container {
+	max-width: 1000px;
+	height: 600px;
+	background-color: grey;
+	margin: 0 auto;
+}
+
+.sign-up-form {
+	width: 440px;
+	height: 400px;
+	background-color: lightgrey;
+	margin: 0 auto;
+	border-radius: 3px;
+	text-align: center;
+}
+
+label {
+  display: block;
+  padding-bottom: 20px;
+  margin-top: 20px;
+}
+
+button {
+	display: block;
+}

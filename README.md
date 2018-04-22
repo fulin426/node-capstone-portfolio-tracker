@@ -1,7 +1,7 @@
 # node-capstone-portfolio-tracker
 Thinkful (https://www.thinkful.com) Second Capstone Project
 
-##Screenshots
+## Screenshots
 
 ## Background
 

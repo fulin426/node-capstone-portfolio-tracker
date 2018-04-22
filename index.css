@@ -80,6 +80,7 @@ li {
 }
 legend {
 	font-size: 38px;
+	padding-bottom: 5px;
 }
 
 .labels-inputs {
@@ -87,10 +88,15 @@ legend {
 	margin-top: 26px;
 }
 
+.labels-inputs-container {
+	width: 290px;
+	margin: 0 auto;
+}
+
 label {
 	display: block;
-	margin-top: 15px;
-	margin-bottom: 12px;
+	margin-top: 12px;
+	float: left;
 }
 
 input {
@@ -105,11 +111,16 @@ input {
 button {
     display: block;
     margin: 0 auto;
-    margin-top: 18px;
+    margin-top: 20px;
     width: 210px;
     height: 54px;
     padding: 15px;
     font-size: 22px;
     font-weight: bold;
     background-color: grey;
+    color: white;
+}
+
+.already-member {
+	padding-top: 15px;
 }

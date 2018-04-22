@@ -61,26 +61,55 @@ li {
 /*sign up portion*/
 .main-container {
 	max-width: 1000px;
-	height: 600px;
+	height: 718px;
 	background-color: grey;
 	margin: 0 auto;
+	display: flex;
+  	align-items: center;
+  	justify-content: center;
 }
 
 .sign-up-form {
-	width: 440px;
-	height: 400px;
+	width: 460px;
+	height: 410px;
 	background-color: lightgrey;
 	margin: 0 auto;
 	border-radius: 3px;
 	text-align: center;
+
+}
+legend {
+	font-size: 38px;
+}
+
+.labels-inputs {
+	line-height: 35px;
+	margin-top: 26px;
 }
 
 label {
-  display: block;
-  padding-bottom: 20px;
-  margin-top: 20px;
+	display: block;
+	margin-top: 15px;
+	margin-bottom: 12px;
+}
+
+input {
+	color: black;
+	width: 290px;
+  	padding: 15px;
+  	font-size: 18px;
+  	border-radius: 3px;
+  	border: 2px solid #DCDCDC;
 }
 
 button {
-	display: block;
+    display: block;
+    margin: 0 auto;
+    margin-top: 18px;
+    width: 210px;
+    height: 54px;
+    padding: 15px;
+    font-size: 22px;
+    font-weight: bold;
+    background-color: grey;
 }

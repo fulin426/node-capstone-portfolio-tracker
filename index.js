@@ -7,7 +7,7 @@ Highcharts.chart('chart-container', {
         type: 'pie'
     },
     title: {
-        text: 'Browser market shares in January, 2018'
+        text: 'Portfolio Result'
     },
     tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -23,28 +23,25 @@ Highcharts.chart('chart-container', {
         }
     },
     series: [{
-        name: 'Brands',
+        name: 'Assets',
         colorByPoint: true,
         data: [{
-            name: 'Chrome',
-            y: 61.41,
-            sliced: true,
-            selected: true
+            name: 'Vanguard Total Stock Market',
+            y: 22,
+/*            sliced: true,
+            selected: true*/
         }, {
-            name: 'Internet Explorer',
-            y: 11.84
+            name: 'Vanguard Total International',
+            y: 38
         }, {
-            name: 'Firefox',
-            y: 10.85
+            name: 'Vanguard Total Bond Market',
+            y: 12
         }, {
-            name: 'Edge',
-            y: 4.67
+            name: 'Schwab U.S. REIT ETF',
+            y: 20
         }, {
-            name: 'Safari',
-            y: 4.18
-        }, {
-            name: 'Other',
-            y: 7.05
+            name: 'Fidelity® Small Cap Growth Fund',
+            y: 8
         }]
     }]
 });

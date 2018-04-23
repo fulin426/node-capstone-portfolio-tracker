@@ -161,7 +161,7 @@ legend {
 
 .add-button {
     width: 85px;
-    height: 32px;
+    height: 35px;
     margin-left: 18px;
     background-color: #A9A9A9;
     border-radius: 3px;
@@ -235,4 +235,17 @@ legend {
 	display: inline-block;
 	height: 34px;
 	padding: 5px;
+}
+
+#total {
+	text-align: right;
+	font-weight: 600;
+}
+
+.analyze-button {
+	width: 160px;
+	height: 40px;
+	float: right;
+	margin-top: 8px;
+	border-radius: 3px;
 }

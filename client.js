@@ -45,3 +45,4 @@ Highcharts.chart('chart-container', {
         }]
     }]
 });
+

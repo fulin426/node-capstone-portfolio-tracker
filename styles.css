@@ -73,7 +73,7 @@ li {
 	display: flex;
   	align-items: center;
   	justify-content: center;
-  	border: solid black 1px;
+  	border: solid lightgrey 1px;
 }
 
 .sign-up-form {
@@ -139,7 +139,22 @@ legend {
 }
 
 /*Portfolio Page*/
+/*information section*/
+.rebalance-info {
+	display: block;
+}
+
+.rebalance-header {
+	font-size: 24px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
 /*Add form*/
+.portfolio-body{
+	max-width: 700px;
+	margin: 0 auto;
+}
+
 .header {
 	display: inline-block;
 	height: 30px;
@@ -149,16 +164,16 @@ legend {
 
 .add-asset-form {
 	background-color: #E8E8E8;
-	height: 100px;
-	max-width: 690px;
+	max-height: 100px;
 	padding: 10px;
-	margin: 30px auto;
+	margin: 20px auto;
 	border-radius: 4px;
 }
 
 #add-new-asset {
 	font-size: 20px;
 	margin-bottom: 8px;
+	text-align: center;
 }
 
 .new {
@@ -212,7 +227,6 @@ legend {
 
 .results-header {
 	border-bottom: solid black 1px;
-	width: 100%;
 }
 
 .result-name {
@@ -261,8 +275,11 @@ legend {
 	border-radius: 3px;
 }
 
-#chart-container{
-	max-width: 720px;
+#chart-container {
 	max-height: 450px;
 	margin: 0 auto;
+	display: block;
 }
+
+
+

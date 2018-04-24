@@ -20,153 +20,167 @@
 	</div>
 <nav>
 <body>
-	<section id="signup-page">
-		<main role="main" class="main-container">
-			<form class="sign-up-form">
-				<fieldset class="labels-inputs">
-					<legend>Sign up</legend>
-					<p id="intro">Keep Track of your portfolio</p>
-					<div class="labels-inputs-container">
-						<label class="signup-label">Email:</label>
-						<input type="email" placeholder="demo@demo.com" class="signup-input" required/>
-						<label class="signup-label">Password:</label>
-						<input type="password" placeholder="demo-password" class="signup-input" required/>
+	<main role="main">
+		<section id="signup-page" class="main-container">
+				<form class="sign-up-form">
+					<fieldset class="labels-inputs">
+						<legend>Sign up</legend>
+						<p id="intro">Keep Track of your portfolio</p>
+						<div class="labels-inputs-container">
+							<label class="signup-label">Email:</label>
+							<input type="email" placeholder="demo@demo.com" class="signup-input" required/>
+							<label class="signup-label">Password:</label>
+							<input type="password" placeholder="demo-password" class="signup-input" required/>
+						</div>
+						<button type="submit" class="signup-button">Sign Up</button>	
+					</fieldset>
+					<div class="already-member">
+						<p>Already a member? <a href="/login">Log In</a></p>
 					</div>
-					<button type="submit" class="signup-button">Sign Up</button>	
-				</fieldset>
-				<div class="already-member">
-					<p>Already a member? <a href="/login">Log In</a></p>
-				</div>
-			</form>
-	</section>	
-		
-	<section id="login-page">
-	</section>
-	
-	<section id="portfolio-page">
-		<form>
-			<fieldset class="add-asset-form">
-				<p id="add-new-asset">Add New Asset</p>
-				<div class="header name-container">
-					<label class="new name">Name</label>
-					<input class="name-input" placeholder="Vanguard SP 500" required/>
-				</div>
-				<div class="header current-value">
-					<label class="new current">Current Value:</label>
-					<input class="value-input" placeholder="88000" required/>
-				</div>
-				<div class="header target-container">
-					<label class="new target">Target %:</label>
-					<input class="target-input" placeholder="20%" required/>
-				</div>
-				<button class="add-button">Add</button>
-			</fieldset>
-		</form>
-		<div class="summary-container">
-			<div class="results-container">
-				<div class="results-header">
-					<div class="header result-name">
-						<p>Name</p>
+				</form>
+		</section>	
+		<section id="login-page" class="main-container">
+				<form class="sign-up-form">
+					<fieldset class="labels-inputs">
+						<legend>Sign up</legend>
+						<p id="intro">Keep Track of your portfolio</p>
+						<div class="labels-inputs-container">
+							<label class="signup-label">Email:</label>
+							<input type="email" placeholder="demo@demo.com" class="signup-input" required/>
+							<label class="signup-label">Password:</label>
+							<input type="password" placeholder="demo-password" class="signup-input" required/>
+						</div>
+						<button type="submit" class="signup-button">Sign Up</button>	
+					</fieldset>
+					<div class="already-member">
+						<p>Already a member? <a href="/login">Log In</a></p>
+					</div>
+				</form>
+		</section>
+		<section id="portfolio-page">
+			<form>
+				<fieldset class="add-asset-form">
+					<p id="add-new-asset">Add New Asset</p>
+					<div class="header name-container">
+						<label class="new name">Name</label>
+						<input class="name-input" placeholder="Vanguard SP 500" required/>
 					</div>
 					<div class="header current-value">
-						<p>Current Value $</p>
+						<label class="new current">Current Value:</label>
+						<input class="value-input" placeholder="88000" required/>
 					</div>
-					<div class="header current-percent">
-						<p>Current %</p>
+					<div class="header target-container">
+						<label class="new target">Target %:</label>
+						<input class="target-input" placeholder="20%" required/>
 					</div>
-					<div class="header target-percent">
-						<p>Target %</p>
+					<button class="add-button">Add</button>
+				</fieldset>
+			</form>
+			<div class="summary-container">
+				<div class="results-container">
+					<div class="results-header">
+						<div class="header result-name">
+							<p>Name</p>
+						</div>
+						<div class="header current-value">
+							<p>Current Value $</p>
+						</div>
+						<div class="header current-percent">
+							<p>Current %</p>
+						</div>
+						<div class="header target-percent">
+							<p>Target %</p>
+						</div>
 					</div>
+					<div class="results-item">
+						<div class="item result-name">
+							<input value="Vanguard Total Stock Market"></input>
+						</div>
+						<div class="item current-value">
+							<input class="result-number" value="22000"></input>
+						</div>
+						<div class="item current-percent">
+							<input class="result-number" value="22"></input>
+						</div>
+						<div class="item target-percent">
+							<input class="result-number" value="30"></input>
+						</div>
+					</div>
+					<div class="results-item">
+						<div class="item result-name">
+							<input value="Vanguard Total International"></input>
+						</div>
+						<div class="item current-value">
+							<input class="result-number" value="38000"></input>
+						</div>
+						<div class="item current-percent">
+							<input class="result-number" value="38"></input>
+						</div>
+						<div class="item target-percent">
+							<input class="result-number" value="30"></input>
+						</div>
+					</div>
+					<div class="results-item">
+						<div class="item result-name">
+							<input value="Vanguard Total Bond Market"></input>
+						</div>
+						<div class="item current-value">
+							<input class="result-number" value="12000"></input>
+						</div>
+						<div class="item current-percent">
+							<input class="result-number" value="12"></input>
+						</div>
+						<div class="item target-percent">
+							<input class="result-number" value="20"></input>
+						</div>
+					</div>
+					<div class="results-item">
+						<div class="item result-name">
+							<input value="Schwab U.S. REIT ETF"></input>
+						</div>
+						<div class="item current-value">
+							<input class="result-number" value="20000"></input>
+						</div>
+						<div class="item current-percent">
+							<input class="result-number" value="20"></input>
+						</div>
+						<div class="item target-percent">
+							<input class="result-number" value="10"></input>
+						</div>
+					</div>
+					<div class="results-item">
+						<div class="item result-name">
+							<input value="Fidelity® Small Cap Growth Fund"></input>
+						</div>
+						<div class="item current-value">
+							<input class="result-number" value="8000"></input>
+						</div>
+						<div class="item current-percent">
+							<input class="result-number" value="8"></input>
+						</div>
+						<div class="item target-percent">
+							<input class="result-number" value="10"></input>
+						</div>
+					</div>
+					<div class="results-item total">
+						<div class="item result-name">
+							<p id="total">Total</p>
+						</div>
+						<div class="item current-value">
+							<input class="result-number" value="10000"></input>
+						</div>
+						<div class="item current-percent">
+							<input class="result-number" value="100"></input>
+						</div>
+						<div class="item target-percent">
+							<input class="result-number" value="100"></input>
+						</div>
+					</div>
+					<button class="analyze-button">Analyze Portfolio</button>		
 				</div>
-				<div class="results-item">
-					<div class="item result-name">
-						<input value="Vanguard Total Stock Market"></input>
-					</div>
-					<div class="item current-value">
-						<input class="result-number" value="22000"></input>
-					</div>
-					<div class="item current-percent">
-						<input class="result-number" value="22"></input>
-					</div>
-					<div class="item target-percent">
-						<input class="result-number" value="30"></input>
-					</div>
-				</div>
-				<div class="results-item">
-					<div class="item result-name">
-						<input value="Vanguard Total International"></input>
-					</div>
-					<div class="item current-value">
-						<input class="result-number" value="38000"></input>
-					</div>
-					<div class="item current-percent">
-						<input class="result-number" value="38"></input>
-					</div>
-					<div class="item target-percent">
-						<input class="result-number" value="30"></input>
-					</div>
-				</div>
-				<div class="results-item">
-					<div class="item result-name">
-						<input value="Vanguard Total Bond Market"></input>
-					</div>
-					<div class="item current-value">
-						<input class="result-number" value="12000"></input>
-					</div>
-					<div class="item current-percent">
-						<input class="result-number" value="12"></input>
-					</div>
-					<div class="item target-percent">
-						<input class="result-number" value="20"></input>
-					</div>
-				</div>
-				<div class="results-item">
-					<div class="item result-name">
-						<input value="Schwab U.S. REIT ETF"></input>
-					</div>
-					<div class="item current-value">
-						<input class="result-number" value="20000"></input>
-					</div>
-					<div class="item current-percent">
-						<input class="result-number" value="20"></input>
-					</div>
-					<div class="item target-percent">
-						<input class="result-number" value="10"></input>
-					</div>
-				</div>
-				<div class="results-item">
-					<div class="item result-name">
-						<input value="Fidelity® Small Cap Growth Fund"></input>
-					</div>
-					<div class="item current-value">
-						<input class="result-number" value="8000"></input>
-					</div>
-					<div class="item current-percent">
-						<input class="result-number" value="8"></input>
-					</div>
-					<div class="item target-percent">
-						<input class="result-number" value="10"></input>
-					</div>
-				</div>
-				<div class="results-item total">
-					<div class="item result-name">
-						<p id="total">Total</p>
-					</div>
-					<div class="item current-value">
-						<input class="result-number" value="10000"></input>
-					</div>
-					<div class="item current-percent">
-						<input class="result-number" value="100"></input>
-					</div>
-					<div class="item target-percent">
-						<input class="result-number" value="100"></input>
-					</div>
-				</div>
-				<button class="analyze-button">Analyze Portfolio</button>		
 			</div>
-		</div>
-		<div id="chart-container"></div>
-	</section>	
+			<div id="chart-container"></div>
+		</section>	
 	</main>
 	<footer>
 	</footer>

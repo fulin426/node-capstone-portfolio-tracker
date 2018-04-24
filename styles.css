@@ -73,6 +73,7 @@ li {
 	display: flex;
   	align-items: center;
   	justify-content: center;
+  	border: solid black 1px;
 }
 
 .sign-up-form {

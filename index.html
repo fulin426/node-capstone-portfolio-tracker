@@ -47,15 +47,15 @@
 		<form>
 			<fieldset class="add-asset-form">
 				<p id="add-new-asset">Add New Asset</p>
-				<div class="add name-container">
+				<div class="header name-container">
 					<label class="new name">Name</label>
 					<input class="name-input" placeholder="Vanguard SP 500" required/>
 				</div>
-				<div class="add current-container">
+				<div class="header current-value">
 					<label class="new current">Current Value:</label>
 					<input class="value-input" placeholder="88000" required/>
 				</div>
-				<div class="add target-container">
+				<div class="header target-container">
 					<label class="new target">Target %:</label>
 					<input class="target-input" placeholder="20%" required/>
 				</div>
@@ -69,7 +69,7 @@
 						<p>Name</p>
 					</div>
 					<div class="header current-value">
-						<p>Current Value</p>
+						<p>Current Value $</p>
 					</div>
 					<div class="header current-percent">
 						<p>Current %</p>
@@ -80,72 +80,72 @@
 				</div>
 				<div class="results-item">
 					<div class="item result-name">
-						<p>Vanguard Total Stock Market</p>
+						<input value="Vanguard Total Stock Market"></input>
 					</div>
 					<div class="item current-value">
-						<p>$22000</p>
+						<input class="result-number" value="22000"></input>
 					</div>
 					<div class="item current-percent">
-						<p>22%</p>
+						<input class="result-number" value="22"></input>
 					</div>
 					<div class="item target-percent">
-						<p>30%</p>
+						<input class="result-number" value="30"></input>
 					</div>
 				</div>
 				<div class="results-item">
 					<div class="item result-name">
-						<p>Vanguard Total International</p>
+						<input value="Vanguard Total International"></input>
 					</div>
 					<div class="item current-value">
-						<p>$38000</p>
+						<input class="result-number" value="38000"></input>
 					</div>
 					<div class="item current-percent">
-						<p>38%</p>
+						<input class="result-number" value="38"></input>
 					</div>
 					<div class="item target-percent">
-						<p>30%</p>
+						<input class="result-number" value="30"></input>
 					</div>
 				</div>
 				<div class="results-item">
 					<div class="item result-name">
-						<p>Vanguard Total Bond Market</p>
+						<input value="Vanguard Total Bond Market"></input>
 					</div>
 					<div class="item current-value">
-						<p>$12000</p>
+						<input class="result-number" value="12000"></input>
 					</div>
 					<div class="item current-percent">
-						<p>12%</p>
+						<input class="result-number" value="12"></input>
 					</div>
 					<div class="item target-percent">
-						<p>20%</p>
+						<input class="result-number" value="20"></input>
 					</div>
 				</div>
 				<div class="results-item">
 					<div class="item result-name">
-						<p>Schwab U.S. REIT ETF</p>
+						<input value="Schwab U.S. REIT ETF"></input>
 					</div>
 					<div class="item current-value">
-						<p>$20000</p>
+						<input class="result-number" value="20000"></input>
 					</div>
 					<div class="item current-percent">
-						<p>20%</p>
+						<input class="result-number" value="20"></input>
 					</div>
 					<div class="item target-percent">
-						<p>10%</p>
+						<input class="result-number" value="10"></input>
 					</div>
 				</div>
 				<div class="results-item">
 					<div class="item result-name">
-						<p>Fidelity® Small Cap Growth Fund</p>
+						<input value="Fidelity® Small Cap Growth Fund"></input>
 					</div>
 					<div class="item current-value">
-						<p>$8000</p>
+						<input class="result-number" value="8000"></input>
 					</div>
 					<div class="item current-percent">
-						<p>8%</p>
+						<input class="result-number" value="8"></input>
 					</div>
 					<div class="item target-percent">
-						<p>10%</p>
+						<input class="result-number" value="10"></input>
 					</div>
 				</div>
 				<div class="results-item total">
@@ -153,21 +153,20 @@
 						<p id="total">Total</p>
 					</div>
 					<div class="item current-value">
-						<p>$10000</p>
+						<input class="result-number" value="10000"></input>
 					</div>
 					<div class="item current-percent">
-						<p>100%</p>
+						<input class="result-number" value="100"></input>
 					</div>
 					<div class="item target-percent">
-						<p>100%</p>
+						<input class="result-number" value="100"></input>
 					</div>
 				</div>
 				<button class="analyze-button">Analyze Portfolio</button>		
 			</div>
 		</div>
-		<div class="chart-container" id="chart-container" style="width:100%; height:400px;"></div>
+		<div id="chart-container"></div>
 	</section>	
-
 	</main>
 	<footer>
 	</footer>

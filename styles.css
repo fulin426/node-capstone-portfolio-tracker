@@ -32,6 +32,9 @@ a:link {
 	font-weight: bold;
 }
 
+a:hover {
+    color: black;
+}
 body{
 	background:url(https://raw.githubusercontent.com/fulin426/node-capstone-portfolio-tracker/master/Images/charts-computer-bg.jpg);
 	background-repeat: no-repeat;
@@ -97,6 +100,12 @@ li {
 	width: 200px;
 }
 
+#landing-page-title {
+	display: block;
+	font-weight: bold;
+	font-size: 32px;
+}
+
 .landing-button {
 	display: inline-block;
 	margin: 10px;
@@ -119,11 +128,6 @@ li {
 	margin: 0 auto;
 	border-radius: 3px;
 	text-align: center;
-}
-
-#intro{
-	font-size: 16px;
-	padding-top: 10px;
 }
 
 legend {
@@ -193,7 +197,7 @@ legend {
 }
 
 .add-asset-form {
-	background-color: #E8E8E8;
+	background-color: #F5F5F5;
 	max-height: 100px;
 	padding: 10px;
 	margin: 20px auto;
@@ -259,11 +263,11 @@ legend {
 }
 
 .result-name {
-	max-width: 300px;
+	width: 300px;
 }
 
 .current-value {
-	max-width: 138px;
+	width: 138px;
 	text-align: right;
 }
 
@@ -278,7 +282,7 @@ legend {
 }
 
 .results-item{
-	background-color: #E8E8E8;
+	background-color: #F5F5F5;
 }
 
 .item {

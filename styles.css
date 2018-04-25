@@ -26,6 +26,32 @@
 /*	border: solid red 1px;*/
 }
 
+a:link {
+	text-decoration: none;
+	color: white;
+	font-weight: bold;
+}
+
+body{
+	background:url(https://raw.githubusercontent.com/fulin426/node-capstone-portfolio-tracker/master/Images/charts-computer-bg.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+    background-position: center;
+}
+
+button{
+	height: 46px;
+    padding: 8px;
+    background-color: #bf5050;
+    color: white;
+    border-radius: 3px;
+    font-size: 22px;
+    font-weight: bold;
+    height: 46px;
+    cursor:pointer;
+}
+
 input {
 	width: 100%;
   	border-radius: 3px;
@@ -35,13 +61,15 @@ input {
 /*navigation bar*/
 .nav-bar {
 	width: 100%;
-	height: 60px;
-	background-color: lightgrey;
-	color: red;
+	height: 50px;
+	background-color: #48abab;
 	margin: 0 auto;
-	padding left: 25px;
-	padding right: 25px;
 	display: fixed;
+}
+
+.nav-links-container {
+ max-width: 95%;
+ margin: 0 auto;
 }
 
 ul {
@@ -57,23 +85,31 @@ li {
 }
 
 #home-link{
-	padding-left: 25px;
+	font-weight: 24px;
 }
 #sign-up {
 	float: right;
-	padding-right: 25px;
+	font-weight: 20px;
 }
 
+/*landing page*/
+.landing-button {
+	width: 200px;
+}
+
+.landing-button {
+	display: inline-block;
+	margin: 10px;
+}
 /*sign up portion*/
 .main-container {
 	width: 100%;
 	height: 718px;
-	background-color: grey;
 	margin: 0 auto;
 	display: flex;
   	align-items: center;
   	justify-content: center;
-  	border: solid lightgrey 1px;
+/*  	border: solid lightgrey 1px;*/
 }
 
 .sign-up-form {
@@ -125,13 +161,7 @@ legend {
     margin: 0 auto;
     margin-top: 20px;
     width: 290px;
-    height: 46px;
     padding: 8px;
-    font-size: 22px;
-    font-weight: bold;
-    background-color: grey;
-    color: white;
-    border-radius: 3px;
 }
 
 .already-member {
@@ -182,10 +212,9 @@ legend {
 
 .add-button {
     width: 85px;
-    height: 35px;
-    margin-left: 18px;
-    background-color: #A9A9A9;
-    border-radius: 3px;
+    height: 40px;
+    font-size: 20px;
+    margin-left: 15px;
 }
 
 .name-container{
@@ -268,7 +297,7 @@ legend {
 }
 
 .analyze-button {
-	width: 160px;
+	width: 205px;
 	height: 40px;
 	float: right;
 	margin-top: 8px;

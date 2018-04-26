@@ -45,4 +45,78 @@ Highcharts.chart('chart-container', {
         }]
     }]
 });
+//when the page loads
+$(document).ready(function () {
+    //hide all the sections
+    $('section').hide();
+    $('#chart-container').hide();
+    //show only landing page
+    $('#landing-page').show();
+});
+
+$('#login-trigger').click(function(event) {
+event.preventDefault();
+    //hide all the sections
+    $('section').hide();
+    $('#chart-container').hide();
+    //show only login page
+    $('#login-page').show();
+});
+
+$('#sign-up-trigger').click(function(event) {
+event.preventDefault();
+    //hide all the sections
+    $('section').hide();
+    $('#chart-container').hide();
+    //show only signup page
+    $('#signup-page').show();
+});
+
+$('#sigup-form-login-trigger').click(function(event) {
+event.preventDefault();
+    //hide all the sections
+    $('section').hide();
+    $('#chart-container').hide();
+    //show only login page
+    $('#login-page').show();
+});
+
+$('#login-form-signup-trigger').click(function(event) {
+event.preventDefault();
+    //hide all the sections
+    $('section').hide();
+    $('#chart-container').hide();
+    //show only signup page
+    $('#signup-page').show();
+});
+//signup form submission trigger
+$("#signup-form").submit(function (event) { 
+    event.preventDefault(); 
+    //hide all the sections
+    $('section').hide();
+    $('#chart-container').hide();
+    //show only login page
+    $('#login-page').show();
+});
+
+$("#login-form").submit(function (event) { 
+    event.preventDefault();
+    //hide all the sections
+    $('section').hide();
+    $('#chart-container').hide();
+    //show only login page
+    $('#portfolio-page').show();
+});
+
+$("#add-asset").submit(function (event) { 
+    event.preventDefault();
+    console.log('adding asset');
+});
+
+$('.analyze-button').click(function(event) {
+event.preventDefault();
+    $('#chart-container').show();
+});
+
+
 

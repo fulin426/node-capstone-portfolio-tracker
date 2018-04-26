@@ -35,12 +35,14 @@ a:link {
 a:hover {
     color: black;
 }
-body{
+
+.body {
 	background:url(https://raw.githubusercontent.com/fulin426/node-capstone-portfolio-tracker/master/Images/charts-computer-bg.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-attachment: fixed;
     background-position: center;
+    height: 100%;
 }
 
 button{
@@ -96,8 +98,21 @@ li {
 }
 
 /*landing page*/
+.landing-page-items {
+	width: 100%;
+	position: absolute;
+	top: 40%;
+}
+
+.landing-page-buttons-wrapper {
+	display: block;
+	margin: 0 auto;
+	align-items: flex-start;
+    text-align: center;
+}
 .landing-button {
-	width: 200px;
+	width: 40%;
+	max-height: 50px;
 }
 
 #landing-page-title {
@@ -106,6 +121,7 @@ li {
 	font-size: 38px;
 	text-align: center;
 	height: 64px;
+	color: #48abab;
 }
 
 .landing-button {
@@ -121,12 +137,14 @@ li {
 /*sign up portion*/
 .main-container {
 	width: 100%;
-	height: 718px;
+	height: 100%;
 	margin: 0 auto;
 	display: flex;
   	align-items: center;
   	justify-content: center;
-/*  	border: solid lightgrey 1px;*/
+  	border: solid lightgrey 1px;
+  	position: absolute;
+  	top: 9%;
 }
 
 .sign-up-form {
@@ -136,6 +154,7 @@ li {
 	margin: 0 auto;
 	border-radius: 3px;
 	text-align: center;
+	border: solid lightgrey 1px;
 }
 
 legend {
@@ -182,6 +201,12 @@ legend {
 
 /*Portfolio Page*/
 /*information section*/
+.portfolio-background {
+	width: 100%;
+	height: 100%;
+	background-color: white;
+}
+
 .rebalance-info {
 	display: block;
 }
@@ -322,5 +347,18 @@ legend {
 	display: block;
 }
 
+#portfolio-page {
+	background-color: white;
+}
 
+@media only screen and (min-width: 640px) {
+body
 
+.landing-button {
+	width: 17%;
+}
+
+.main-container {
+	height: 720px;
+	position: static;
+}

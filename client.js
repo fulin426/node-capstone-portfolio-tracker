@@ -103,6 +103,7 @@ $("#login-form").submit(function (event) {
     event.preventDefault();
     //hide all the sections
     $('section').hide();
+    $('.body').removeClass();
     $('#chart-container').hide();
     //show only login page
     $('#portfolio-page').show();

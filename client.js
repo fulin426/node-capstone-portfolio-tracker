@@ -52,6 +52,7 @@ $(document).ready(function () {
     $('#chart-container').hide();
     //show only landing page
     $('#landing-page').show();
+/*    $('#portfolio-page').show();*/
 });
 
 $('#login-trigger').click(function(event) {

@@ -42,6 +42,7 @@ a:hover {
 	background-size: cover;
 	background-attachment: fixed;
     background-position: center;
+    background-color: 
     height: 100%;
 }
 
@@ -144,7 +145,7 @@ li {
   	justify-content: center;
   	border: solid lightgrey 1px;
   	position: absolute;
-  	top: 9%;
+  	top: 8%;
 }
 
 .sign-up-form {
@@ -221,12 +222,15 @@ legend {
 	max-width: 700px;
 	margin: 0 auto;
 }
+.add-asset-container{
+	width: 100%;
+}
 
 .header {
 	display: inline-block;
+	font-size: 15px;
 	height: 30px;
 	padding: 5px;
-	font-weight: 600;
 }
 
 .add-asset-form {
@@ -246,40 +250,45 @@ legend {
 .new {
 	display: block;
 }
+.submit-button-container{
+	display: inline-block;
+}
 
 .add-button {
-    width: 85px;
-    height: 40px;
-    font-size: 20px;
-    margin-left: 15px;
+    max-width: 85px;
+    height: 35px;
+    font-size: 18px;
 }
 
 .name-container{
-
+	width: 47%;
 }
 
 .target-container { 
-	margin-left: 15px;
+	width: 14%;
+	text-align: right;
 }
 
 .current-container {
-	margin-left: 15px
+	width: 20%;
+	text-align: right;
 }
 
 .name-input {
-	max-width: 260px;
+
 }
 
 .value-input {
-	max-width: 116px;
+	width: 100%;
+	text-align: right;
 }
 
 .target-input {
-	max-width: 116px;
+	width: 100%;
+	text-align: right;
 }
 
 /*results section*/
-
 .summary-container {
 	width: 100%;
 	margin: 0 auto;
@@ -296,21 +305,21 @@ legend {
 }
 
 .result-name {
-	width: 300px;
+	width: 51%;
 }
 
 .current-value {
-	width: 138px;
+	width: 20%;
 	text-align: right;
 }
 
 .current-percent {
-	max-width: 90px;
+	width: 13%;
 	text-align: right;
 }
 
 .target-percent {
-	max-width: 90px;
+	width: 12%;
 	text-align: right;
 }
 
@@ -361,4 +370,16 @@ body
 .main-container {
 	height: 720px;
 	position: static;
+}
+
+.header {
+	font-weight: 600;
+	font-size: 16px;
+}
+.add-button {
+	font-size: 20px;
+}
+
+.name-container {
+	width: 51%;
 }

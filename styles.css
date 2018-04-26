@@ -103,12 +103,20 @@ li {
 #landing-page-title {
 	display: block;
 	font-weight: bold;
-	font-size: 32px;
+	font-size: 38px;
+	text-align: center;
+	height: 64px;
 }
 
 .landing-button {
 	display: inline-block;
 	margin: 10px;
+}
+
+.landing-page-intro {
+	text-align: center;
+	height: 50px;
+	line-height: 25px
 }
 /*sign up portion*/
 .main-container {

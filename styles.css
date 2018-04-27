@@ -352,11 +352,15 @@ legend {
 	font-weight: 600;
 }
 
+.analyze-button-container{
+	height: 48px;
+}
+
 .analyze-button {
 	width: 205px;
 	height: 40px;
 	float: right;
-	margin-top: 8px;
+	margin-top: 4px;
 	border-radius: 3px;
 }
 
@@ -371,6 +375,10 @@ legend {
 }
 
 /*footer*/
+footer {
+	display: none;
+}
+
 .logo_container{
 	margin: 0 auto;
 	margin-top: 18px;
@@ -422,4 +430,8 @@ body
 
 .name-container {
 	width: 51%;
+}
+
+footer {
+	display: block;
 }

@@ -112,6 +112,7 @@ li {
 	align-items: flex-start;
     text-align: center;
 }
+
 .landing-button {
 	width: 40%;
 	max-height: 50px;
@@ -119,11 +120,16 @@ li {
 
 #landing-page-title {
 	display: block;
-	font-weight: bold;
-	font-size: 38px;
-	text-align: center;
-	height: 64px;
-	color: #48abab;
+    font-weight: bold;
+    font-size: 26px;
+    text-align: center;
+    height: 98px;
+    width: 86%;
+    margin: 0 auto;
+    background-color: #48abab;
+    color: white;
+    line-height: 100px;
+    border-radius: 2px;
 }
 
 .landing-button {
@@ -144,7 +150,6 @@ li {
 	display: flex;
   	align-items: center;
   	justify-content: center;
-  	border: solid lightgrey 1px;
   	position: absolute;
   	top: 8%;
 }
@@ -237,9 +242,10 @@ legend {
 .add-asset-form {
 	background-color: #F5F5F5;
 	max-height: 100px;
-	padding: 10px;
+	padding: 6px;
 	margin: 20px auto;
 	border-radius: 4px;
+	border: 1px solid lightgrey;
 }
 
 #add-new-asset {
@@ -293,6 +299,9 @@ legend {
 .summary-container {
 	width: 100%;
 	margin: 0 auto;
+	background-color: #F5F5F5;
+	border: solid lightgrey 1px;
+	padding: 6px;
 }
 
 .results-container {
@@ -302,7 +311,7 @@ legend {
 
 
 .results-header {
-	border-bottom: solid black 1px;
+	background-color: #F5F5F5;
 }
 
 .result-name {
@@ -361,6 +370,28 @@ legend {
 	background-color: white;
 }
 
+/*footer*/
+.logo_container{
+	margin: 0 auto;
+	margin-top: 18px;
+	margin-bottom: 25px;
+	width: 245px;
+	text-align: center;
+}
+
+.contact_img {
+	width: 38px;
+	display: inline-block;
+	margin-left: 20px;
+	margin-right: 20px;
+	text-align: center;
+}
+
+.contact_logo {
+	width: 36px;
+	cursor:pointer;
+}
+
 @media only screen and (min-width: 640px) {
 body
 
@@ -368,17 +399,25 @@ body
 	width: 17%;
 }
 
+#landing-page-title {
+	font-size: 48px;
+	width: 48%;
+	margin-bottom: 15px;
+}
+
 .main-container {
-	height: 720px;
+	height: 760px;
 	position: static;
 }
 
 .header {
+	background-color: #F5F5F5;
 	font-weight: 600;
 	font-size: 16px;
 }
 .add-button {
 	font-size: 20px;
+    width: 85px;
 }
 
 .name-container {

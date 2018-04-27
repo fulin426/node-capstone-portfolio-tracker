@@ -106,7 +106,8 @@ $("#login-form").submit(function (event) {
     $('section').hide();
     $('.body').removeClass();
     $('#chart-container').hide();
-    //show only login page
+    $('footer').hide();
+    //show only portfolio page
     $('#portfolio-page').show();
 });
 

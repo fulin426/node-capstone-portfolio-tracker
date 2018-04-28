@@ -93,25 +93,30 @@ event.preventDefault();
 //signup form submission trigger
 $("#signup-form").submit(function (event) { 
     event.preventDefault(); 
-    //hide all the sections
-    $('section').hide();
-    $('#chart-container').hide();
-    //show only login page
-    $('#login-page').show();
+   
+
+    //take the input from the user
     const email = $('#signup-email').val();
     const password = $('#signup-password').val();
+
+    //validtae the input
         if (email === '') {
             alert('Please Add Valid Email');
         } else if (password === '') {
             alert('Please Add Valid Password');
-        } else {
+        } 
+
+        //if the input is valid
+        else {
+            //create a new user object
             const newUserObject = {
                 email: email,
                 password: password
             };
             console.log(newUserObject);
-            // will assign a value to variable 'user' in signin step below
-            // AJAX call to send form data up to server/DB and create new user
+
+
+            // send the user object to the api call
             $.ajax({
                 type: 'POST',
                 url: '/users/create',
@@ -119,12 +124,19 @@ $("#signup-form").submit(function (event) {
                 data: JSON.stringify(newUserObject),
                 contentType: 'application/json'
             })
+
+            //if the api call is succefull
             .done(function (result) {
+
+                //display the results
                 console.log(result);               
-               /* newUserToggle = true;
-                alert('Thanks for signing up! You may now sign in with your username and password.');
-                showSignInPage();*/
+                //hide all the sections
+                $('section').hide();
+                $('#chart-container').hide();
+                //show only login page
+                $('#login-page').show();
             })
+            //if the api call is NOT succefull
             .fail(function (jqXHR, error, errorThrown) {
                 console.log(jqXHR);
                 console.log(error);
@@ -135,13 +147,62 @@ $("#signup-form").submit(function (event) {
 
 $("#login-form").submit(function (event) { 
     event.preventDefault();
-    //hide all the sections
-    $('section').hide();
-    $('.body').removeClass();
-    $('#chart-container').hide();
-    $('footer').hide();
-    //show only portfolio page
-    $('#portfolio-page').show();
+    
+
+
+    //take the input from the user
+    const email = $('#login-email').val();
+    const password = $('#login-password').val();
+
+    //validtae the input
+        if (email === '') {
+            alert('Please Add Valid Email');
+        } else if (password === '') {
+            alert('Please Add Valid Password');
+        } 
+
+        //if the input is valid
+        else {
+            //create a login user object
+            const loginUserObject = {
+                email: email,
+                password: password
+            };
+            console.log(loginUserObject);
+
+
+            // send the user object to the api call
+            $.ajax({
+                type: 'POST',
+                url: '/users/login',
+                dataType: 'json',
+                data: JSON.stringify(loginUserObject),
+                contentType: 'application/json'
+            })
+
+            //if the api call is succefull
+            .done(function (result) {
+
+                //display the results
+                console.log(result);               
+                //hide all the sections
+                $('section').hide();
+                $('.body').removeClass();
+                $('#chart-container').hide();
+                $('footer').hide();
+                //show only portfolio page
+                $('#portfolio-page').show();
+            })
+            //if the api call is NOT succefull
+            .fail(function (jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
+            });
+        };
+
+
+
 });
 
 $("#add-asset").submit(function (event) { 

@@ -9,8 +9,8 @@
 </head>
 <nav role="navigation">
 	<div class="nav-bar">
-		<div class="nav-links-container">
-			<ul>
+		<div class="nav-links-container" role="navigation">
+			<ul role="list">
 				<li class="nav-item">
 					<a href= "#" class="nav_link" id="home-link">Home</a>
 				</li>
@@ -18,8 +18,8 @@
 		</div>
 	</div>
 <nav>
-<body class="body">
-	<main role="main">
+<body class="body" role="document">
+	<main role="main" role="main">
 		<section id="landing-page" class="main-container">
 			<div class="landing-page-items">
 				<div id="landing-page-title">
@@ -32,7 +32,7 @@
 			<div>
 		</section>	
 		<section id="login-page" class="main-container">
-				<form id="login-form" class="sign-up-form">
+				<form id="login-form" class="signup-login-form" role="form">
 					<fieldset class="labels-inputs">
 						<legend>Log In</legend>
 						<p id="intro">Keep Track of your portfolio</p>
@@ -50,7 +50,7 @@
 				</form>
 		</section>	
 		<section id="signup-page" class="main-container">
-				<form id="signup-form" class="sign-up-form">
+				<form id="signup-form" class="signup-login-form" role="form">
 					<fieldset class="labels-inputs">
 						<legend>Sign up</legend>
 						<p id="intro">Keep Track of your portfolio</p>
@@ -77,7 +77,7 @@
 						<p>	This tracker gives you a chance to view all your mutual funds in your portfolio at once. This will give you a chance to examine any changes and rebalance if necessary. The primary goal of a rebalancing strategy is to minimize risk relative to a target asset allocation rather than to maximize returns.Portfolio rebalancing takes profits from higher performing assets and buying lower performing assets to bring the asset allocation to desired values. A good rule of thumb is when asset class has changed by five percentage points. Periodic rebalancing along with a long term investing strategy can help reduce volatility and increase returns over the long term 
 						</p>
 				</div>
-				<form id="add-asset">
+				<form id="add-asset" role="form">
 					<fieldset class="add-asset-form">
 						<p id="add-new-asset">New Asset</p>
 						<div class="header name-container">
@@ -198,7 +198,7 @@
 							</div>
 						</div>
 						<div class="analyze-button-container">
-							<button class="analyze-button">Analyze Portfolio</button>
+							<button type="submit" class="analyze-button">Analyze Portfolio</button>
 						</div>		
 					</div>
 				</div>

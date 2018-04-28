@@ -98,6 +98,39 @@ $("#signup-form").submit(function (event) {
     $('#chart-container').hide();
     //show only login page
     $('#login-page').show();
+    const email = $('#signup-email').val();
+    const password = $('#signup-password').val();
+        if (email === '') {
+            alert('Please Add Valid Email');
+        } else if (password === '') {
+            alert('Please Add Valid Password');
+        } else {
+            const newUserObject = {
+                email: email,
+                password: password
+            };
+            console.log(newUserObject);
+            // will assign a value to variable 'user' in signin step below
+            // AJAX call to send form data up to server/DB and create new user
+            $.ajax({
+                type: 'POST',
+                url: '/users/create',
+                dataType: 'json',
+                data: JSON.stringify(newUserObject),
+                contentType: 'application/json'
+            })
+            .done(function (result) {
+                console.log(result);               
+               /* newUserToggle = true;
+                alert('Thanks for signing up! You may now sign in with your username and password.');
+                showSignInPage();*/
+            })
+            .fail(function (jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
+            });
+        };
 });
 
 $("#login-form").submit(function (event) { 

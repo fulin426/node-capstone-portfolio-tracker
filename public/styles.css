@@ -23,7 +23,6 @@
 	-moz-padding-after: 0px;
 	-moz-padding-start: 0px;
 	-moz-padding-end: 0px;
-/*	border: solid red 1px;*/
 }
 
 a:link {
@@ -37,12 +36,12 @@ a:hover {
 }
 
 .body {
-	background:url(https://raw.githubusercontent.com/fulin426/node-capstone-portfolio-tracker/master/Images/charts-computer-bg.jpg);
+	background:url(https://raw.githubusercontent.com/fulin426/node-capstone-portfolio-tracker/master/public/Images/charts-computer-bg.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-attachment: fixed;
     background-position: center;
-    background-color: #48ab7a;
+    background-color: white;
     font-family: 'Roboto', sans-serif;
     height: 100%;
 }

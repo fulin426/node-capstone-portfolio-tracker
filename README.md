@@ -10,11 +10,15 @@ Portfolio Tracker is a place for the individual investor to keep track of all th
 
 ## User Stories
 As a user I want be able to signup for Portfolio Tracker.
-![User Stories](https://github.com/fulin426/city-discover-api-capstone/blob/master/images/user-stories.jpg)
+![User Stories](https://raw.githubusercontent.com/fulin426/node-capstone-portfolio-tracker/master/public/Images/userStoryLogin.jpg)
 As a User I want be able to sign into Portfolio Tracker.
+![User Stories](https://raw.githubusercontent.com/fulin426/node-capstone-portfolio-tracker/master/public/Images/userStorySignup.jpg)
 As a User I want be able enter new asset information including fund names, target percentage, and price.
+![User Stories](https://raw.githubusercontent.com/fulin426/node-capstone-portfolio-tracker/master/public/Images/userStoryNewAsset.jpg)
 As a User I should be able view a percentage breakdown of my portfolio.
+![User Stories](https://raw.githubusercontent.com/fulin426/node-capstone-portfolio-tracker/master/public/Images/userStoryResultsAnalyze.jpg)
 As a User I should be able view a piechart representing my portfolio.
+![User Stories](https://raw.githubusercontent.com/fulin426/node-capstone-portfolio-tracker/master/public/Images/userStoryPieChartResult.jpg)
 
 ## Working Prototype
 
@@ -26,18 +30,18 @@ Live preview at https://node-portfolio-tracker.herokuapp.com/
 
 ## Technology
 ### Front End
-HTML5
-CSS3
-JavaScript
-jQuery
+* HTML
+* CSS
+* JavaScript
+* jQuery
 
 ### Back End
-Node.js
-Express.js
-MongoDB
-Mongoose
-mLab database
-Mocha and Chai
+* Node.js
+* Express.js
+* MongoDB
+* Mongoose
+* mLab database
+* Mocha and Chai
 
 ## Responsive
 This app is responsive and optimized for desktop and mobile use. 

@@ -56,8 +56,8 @@ function closeServer() {
 // POST -----------------------------------
 // creating a new user
 app.post('/users/create', (req, res) => {
-    let username = req.body.username;
-    username = username.trim();
+    let email = req.body.email;
+    email = email.trim();
     let password = req.body.password;
     password = password.trim();
     bcrypt.genSalt(10, (err, salt) => {
@@ -75,7 +75,7 @@ app.post('/users/create', (req, res) => {
             }
         
         User.create({
-            username,
+            email,
             password: hash,
         }, (err, item) => {
             if (err) {
@@ -84,7 +84,7 @@ app.post('/users/create', (req, res) => {
                 });
             }
             if(item) {
-                console.log(`User \`${username}\` created.`);
+                console.log(`User \`${email}\` created.`);
                 return res.json(item);
             }
         });

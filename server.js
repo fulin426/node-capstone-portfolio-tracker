@@ -164,10 +164,8 @@ app.post('/users/login', function (req, res) {
         });
 });
 
-
-// -------------ACHIEVEMENT ENDPOINTS------------------------------------------------
 // POST -----------------------------------------
-// creating a new achievement
+// creating a new asset
 app.post('/asset/create', (req, res) => {
     let name = req.body.name;
     let value = req.body.value;
@@ -194,16 +192,16 @@ app.post('/asset/create', (req, res) => {
 // PUT --------------------------------------
 app.put('/achievement/:id', function (req, res) {
     let toUpdate = {};
-    let updateableFields = ['achieveWhat', 'achieveHow', 'achieveWhen', 'achieveWhy'];
+    let updateableFields = ['name', 'value', 'target',];
     updateableFields.forEach(function(field) {
         if (field in req.body) {
             toUpdate[field] = req.body[field];
         }
     });
-    Achievement
+    Asset
         .findByIdAndUpdate(req.params.id, {
             $set: toUpdate
-        }).exec().then(function(achievement) {
+        }).exec().then(function(asset) {
             return res.status(204).end();
         }).catch(function(err) {
             return res.status(500).json({
@@ -216,24 +214,26 @@ app.put('/achievement/:id', function (req, res) {
 
 // accessing a single achievement by id
 app.get('/asset/get/:user', function (req, res) {
-
     Asset.find({
             user: req.params.user
         }, (err, asset) => {
-
             if (err) {
                 res.send(err)
             }
-
             res.json(asset)
     })
-    
 });
 
 // DELETE ----------------------------------------
 // deleting an achievement by id
-app.delete('/achievement/:id', function(req, res) {
-    Achievement.findByIdAndRemove(req.params.id).exec().then(function(achievement) {
+/*app.delete('/asset/delete/:id', (req, res) => {
+  Asset.findByIdAndRemove(req.params.id);
+  console.log(`Deleted asset item \`${req.params.id}\``);
+  res.status(204).end();
+});*/
+app.delete('/asset/delete/:id', function(req, res) {
+    Asset.findByIdAndRemove(req.params.id).exec().then(function(asset) {
+        console.log(`Deleted asset item ${req.params.id}`);
         return res.status(204).end();
     }).catch(function(err) {
         return res.status(500).json({

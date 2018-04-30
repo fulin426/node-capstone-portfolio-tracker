@@ -93,6 +93,10 @@ li {
 #home-link{
 	font-weight: 24px;
 }
+
+#welcome-user{
+	float: right;
+}
 #sign-up {
 	float: right;
 	font-weight: 20px;

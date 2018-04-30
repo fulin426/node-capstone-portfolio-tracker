@@ -15,7 +15,7 @@ function calculateCurrentPercentages() {
     return percentages;
 }
 currentPercentages = calculateCurrentPercentages();
-console.log(currentPercentages);
+/*console.log(currentPercentages);*/
 
 //Create data for piechart
 function createPieChartData() {
@@ -29,7 +29,7 @@ function createPieChartData() {
     return chartData;
 }
 const chartData = createPieChartData();
-console.log(chartData);
+/*console.log(chartData);*/
 Highcharts.chart('chart-container', {
     chart: {
         plotBackgroundColor: null,
@@ -56,7 +56,7 @@ Highcharts.chart('chart-container', {
     series: [{
         name: 'Assets',
         colorByPoint: true,
-        data: `${chartData}` /*[{
+        data:[{
             name: 'Vanguard Total Stock Market',
             y: 22,
         }, {
@@ -71,7 +71,7 @@ Highcharts.chart('chart-container', {
         }, {
             name: 'Fidelity® Small Cap Growth Fund',
             y: 8
-        }]*/
+        }]
     }]
 });
 

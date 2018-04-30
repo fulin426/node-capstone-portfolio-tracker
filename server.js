@@ -225,12 +225,6 @@ app.get('/asset/get/:user', function (req, res) {
 });
 
 // DELETE ----------------------------------------
-// deleting an achievement by id
-/*app.delete('/asset/delete/:id', (req, res) => {
-  Asset.findByIdAndRemove(req.params.id);
-  console.log(`Deleted asset item \`${req.params.id}\``);
-  res.status(204).end();
-});*/
 app.delete('/asset/delete/:id', function(req, res) {
     Asset.findByIdAndRemove(req.params.id).exec().then(function(asset) {
         console.log(`Deleted asset item ${req.params.id}`);

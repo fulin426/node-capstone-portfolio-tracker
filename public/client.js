@@ -102,9 +102,8 @@ function displayAssets(loggedInUser) {
                 buildTable += '<p>Target %</p>';
                 buildTable += '</div>';
                 buildTable += '</div>';
-
+                
                 $.each(result, function (resulteKey, resulteValue) {
-
                     buildTable += '<div class="results-item">';
                     buildTable += ' <div class="item result-name">';
                     buildTable += '<input class="asset-name" value="' + resulteValue.name + '"></input>';
@@ -119,10 +118,14 @@ function displayAssets(loggedInUser) {
                     buildTable += '<input class="result-number" value="' + resulteValue.target + '"></input>';
                     buildTable += '</div>';
                     buildTable += '</div>';
-
                 });
+                let buildButton = '';
 
-                $('.results-container').html(buildTable);
+                buildButton += '<div class="analyze-button-container">';
+                buildButton += '<button type="submit" class="analyze-button">Analyze Portfolio</button>';
+                buildButton += '</div>';
+
+                $('.results-container').html(buildTable + buildButton);
             })
             /* if the call is NOT successful show errors */
             .fail(function (jqXHR, error, errorThrown) {
@@ -201,8 +204,6 @@ $("#signup-form").submit(function (event) {
                 password: password
             };
             console.log(newUserObject);
-
-
             // send the user object to the api call
             $.ajax({
                 type: 'POST',
@@ -239,7 +240,7 @@ $("#login-form").submit(function (event) {
     const email = $('#login-email').val();
     const password = $('#login-password').val();
 
-    //validtae the input
+    //validate the input
         if (email === '') {
             alert('Please Add Valid Email');
         } else if (password === '') {
@@ -269,7 +270,8 @@ $("#login-form").submit(function (event) {
             .done(function (result) {
 
                 //display the results
-                console.log(result);               
+                console.log(result);
+                displayAssets(loginUserObject.email)              
                 //hide all the sections
                 $('section').hide();
                 $('.body').removeClass();
@@ -279,7 +281,7 @@ $("#login-form").submit(function (event) {
                 $('#portfolio-page').show();
                 $('#welcome-user').text(`Welcome User ${result.email}`);
                 $('.loggedin-user').val(result.email);
-
+                
             })
             //if the api call is NOT succefull
             .fail(function (jqXHR, error, errorThrown) {
@@ -337,7 +339,7 @@ $("#add-asset").submit(function (event) {
         }
 });
 
-$('.analyze-button').click(function(event) {
+$('.results-container').on('click', '.analyze-button', function(event) {
 event.preventDefault();
     $('#chart-container').show();
 });

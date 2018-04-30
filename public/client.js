@@ -30,7 +30,6 @@ function createPieChartData() {
 }
 const chartData = createPieChartData();
 console.log(chartData);
-
 Highcharts.chart('chart-container', {
     chart: {
         plotBackgroundColor: null,
@@ -57,7 +56,7 @@ Highcharts.chart('chart-container', {
     series: [{
         name: 'Assets',
         colorByPoint: true,
-        data: chartData /*[{
+        data: `${chartData}` /*[{
             name: 'Vanguard Total Stock Market',
             y: 22,
         }, {

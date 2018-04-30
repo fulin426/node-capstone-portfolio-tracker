@@ -96,7 +96,7 @@ app.post('/users/create', (req, res) => {
             }
 
             //if the database connection is succesfull
-            if(item) {
+            if (item) {
                 //show results
                 console.log(`User \`${email}\` created.`);
                 return res.json(item);
@@ -109,7 +109,7 @@ app.post('/users/create', (req, res) => {
 // signing in a user
 app.post('/users/login', function (req, res) {
 
-    //take the email and password from the user obejct from client.js
+    //take the email and password from the user object from client.js
     const email = req.body.email;
     const password = req.body.password;
 

@@ -1,4 +1,36 @@
 // Build the chart
+function calculateCurrentPercentages() {
+    //determine the number of items
+    const numItems = $('.asset-value').length;
+    let total = 0;
+    let percentages=[];
+    //add up each value to get the total
+    for(i = 0; i < numItems; i++) {
+        total = parseInt(document.getElementsByClassName('asset-value')[i].value) + total;
+    }
+    //find the percentage of each asset and create an array
+    for(i = 0; i < numItems; i++) {
+        percentages.push(((document.getElementsByClassName('asset-value')[i].value)/total)*100);
+    }
+    return percentages;
+}
+currentPercentages = calculateCurrentPercentages();
+console.log(currentPercentages);
+
+//Create data for piechart
+function createPieChartData() {
+    //determine the number of items
+    const numItems = $('.asset-name').length;
+    const chartData = [];
+    //create chart data objects
+    for(i = 0; i < numItems; i++) {
+        chartData.push(`name: ${document.getElementsByClassName('asset-name')[i].value}, y: ${currentPercentages[i]}`);
+    }
+    return chartData;
+}
+const chartData = createPieChartData();
+console.log(chartData);
+
 Highcharts.chart('chart-container', {
     chart: {
         plotBackgroundColor: null,
@@ -25,11 +57,9 @@ Highcharts.chart('chart-container', {
     series: [{
         name: 'Assets',
         colorByPoint: true,
-        data: [{
+        data: chartData /*[{
             name: 'Vanguard Total Stock Market',
             y: 22,
-/*            sliced: true,
-            selected: true*/
         }, {
             name: 'Vanguard Total International',
             y: 38
@@ -42,7 +72,7 @@ Highcharts.chart('chart-container', {
         }, {
             name: 'Fidelity® Small Cap Growth Fund',
             y: 8
-        }]
+        }]*/
     }]
 });
 //when the page loads
@@ -148,8 +178,6 @@ $("#signup-form").submit(function (event) {
 $("#login-form").submit(function (event) { 
     event.preventDefault();
     
-
-
     //take the input from the user
     const email = $('#login-email').val();
     const password = $('#login-password').val();
@@ -200,9 +228,6 @@ $("#login-form").submit(function (event) {
                 console.log(errorThrown);
             });
         };
-
-
-
 });
 
 $("#add-asset").submit(function (event) { 
@@ -214,6 +239,4 @@ $('.analyze-button').click(function(event) {
 event.preventDefault();
     $('#chart-container').show();
 });
-
-
 

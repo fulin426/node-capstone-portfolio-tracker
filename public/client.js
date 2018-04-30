@@ -74,6 +74,64 @@ Highcharts.chart('chart-container', {
         }]*/
     }]
 });
+
+
+function displayAssets(loggedInUser) {
+    let result = $.ajax({
+                /* update API end point */
+                url: "/asset/get/"+ loggedInUser,
+                dataType: "json",
+                type: "GET"
+            })
+            .done(function (result) {               
+                console.log(result);
+
+                let buildTable = '';
+
+                buildTable += '<div class="results-header">';
+                buildTable += '<div class="header result-name">';
+                buildTable += '<p>Name</p>';
+                buildTable += '</div>';
+                buildTable += '<div class="header current-value">';
+                buildTable += '<p>Current Value $</p>';
+                buildTable += '</div>';
+                buildTable += '<div class="header current-percent">';
+                buildTable += '<p>Current %</p>';
+                buildTable += '</div>';
+                buildTable += '<div class="header target-percent">';
+                buildTable += '<p>Target %</p>';
+                buildTable += '</div>';
+                buildTable += '</div>';
+
+                $.each(result, function (resulteKey, resulteValue) {
+
+                    buildTable += '<div class="results-item">';
+                    buildTable += ' <div class="item result-name">';
+                    buildTable += '<input class="asset-name" value="' + resulteValue.name + '"></input>';
+                    buildTable += '</div>';
+                    buildTable += ' <div class="item current-value">';
+                    buildTable += '<input class="asset-value" value="' + resulteValue.value + '"></input>';
+                    buildTable += '</div>';
+                    buildTable += ' <div class="item current-percent">';
+                    buildTable += '<input class="result-number" value="22"></input>';
+                    buildTable += '</div>';
+                    buildTable += '<div class="item target-percent">';
+                    buildTable += '<input class="result-number" value="' + resulteValue.target + '"></input>';
+                    buildTable += '</div>';
+                    buildTable += '</div>';
+
+                });
+
+                $('.results-container').html(buildTable);
+            })
+            /* if the call is NOT successful show errors */
+            .fail(function (jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
+            });
+}
+
 //when the page loads
 $(document).ready(function () {
     //hide all the sections
@@ -217,8 +275,11 @@ $("#login-form").submit(function (event) {
                 $('.body').removeClass();
                 $('#chart-container').hide();
                 $('footer').hide();
-                //show only portfolio page
+                //show only portfolio page and welcome user
                 $('#portfolio-page').show();
+                $('#welcome-user').text(`Welcome User ${result.email}`);
+                $('.loggedin-user').val(result.email);
+
             })
             //if the api call is NOT succefull
             .fail(function (jqXHR, error, errorThrown) {
@@ -232,6 +293,48 @@ $("#login-form").submit(function (event) {
 $("#add-asset").submit(function (event) { 
     event.preventDefault();
     console.log('adding asset');
+    const addName = $('.name-input').val();
+    const addValue = $('.value-input').val();
+    const addTarget = $('.target-input').val();
+    const loggedInUser = $('.loggedin-user').val();
+
+    if (addName == "") {
+        alert('Please add asset name');
+    } 
+    else if (addValue == "") {
+        alert('Please add asset value');
+    }
+    else if (addTarget == "") {
+        alert('Please add asset target');
+    }
+    else {
+
+            const newAssetObject = {
+                name: addName,
+                value: addValue,
+                target: addTarget,
+                user: loggedInUser
+            };
+            console.log(newAssetObject);
+            $.ajax({
+                type: 'POST',
+                url: '/asset/create',
+                dataType: 'json',
+                data: JSON.stringify(newAssetObject),
+                contentType: 'application/json'
+            })
+            .done(function (result) {
+               console.log(result);
+                alert('Asset added');
+
+                displayAssets(loggedInUser);
+            })
+            .fail(function (jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
+            });
+        }
 });
 
 $('.analyze-button').click(function(event) {

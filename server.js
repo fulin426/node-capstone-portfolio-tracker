@@ -1,5 +1,6 @@
 const User = require('./models/user');
 const Achievement = require('./models/achievement');
+const Asset = require('./models/asset');
 const bodyParser = require('body-parser');
 const config = require('./config');
 const mongoose = require('mongoose');
@@ -167,20 +168,17 @@ app.post('/users/login', function (req, res) {
 // -------------ACHIEVEMENT ENDPOINTS------------------------------------------------
 // POST -----------------------------------------
 // creating a new achievement
-app.post('/new/create', (req, res) => {
-    let achieveWhat = req.body.achieveWhat;
-    achieveWhat = achieveWhat.trim();
-    let achieveHow = req.body.achieveHow;
-    let achieveWhy = req.body.achieveWhy;
-    let achieveWhen = req.body.achieveWhen;
+app.post('/asset/create', (req, res) => {
+    let name = req.body.name;
+    let value = req.body.value;
+    let target = req.body.target;
     let user = req.body.user;
     
-        Achievement.create({
-            user,
-            achieveWhat,
-            achieveHow,
-            achieveWhen,
-            achieveWhy
+        Asset.create({
+            name,
+            value,
+            target,
+            user
         }, (err, item) => {
             if (err) {
                 return res.status(500).json({
@@ -188,7 +186,6 @@ app.post('/new/create', (req, res) => {
                 });
             }
             if(item) {
-                console.log(`Achievement \`${achieveWhat}\` added.`);
                 return res.json(item);
             }
         });
@@ -215,43 +212,22 @@ app.put('/achievement/:id', function (req, res) {
         });
 });
 
-// GET ------------------------------------
-// accessing all of a user's achievements
-app.get('/achievements/:user', function (req, res) {
-    Achievement
-        .find()
-        .sort('achieveWhen')
-        .then(function (achievements) {
-            let achievementOutput = [];
-            achievements.map(function (achievement) {
-                if (achievement.user == req.params.user) {
-                    achievementOutput.push(achievement);            
-                }
-            });
-        res.json({
-            achievementOutput
-        }); 
-        })
-        .catch(function (err) {
-            console.error(err);
-            res.status(500).json({
-                message: 'Internal server error'
-            });
-        });
-});
+
 
 // accessing a single achievement by id
-app.get('/achievement/:id', function (req, res) {
-    Achievement
-        .findById(req.params.id).exec().then(function (achievement) {
-            return res.json(achievement);
-        })
-        .catch(function (achievements) {
-            console.error(err);
-            res.status(500).json({
-                message: 'Internal Server Error'
-            });
-        });
+app.get('/asset/get/:user', function (req, res) {
+
+    Asset.find({
+            user: req.params.user
+        }, (err, asset) => {
+
+            if (err) {
+                res.send(err)
+            }
+
+            res.json(asset)
+    })
+    
 });
 
 // DELETE ----------------------------------------

@@ -145,8 +145,8 @@ $(document).ready(function () {
     $('section').hide();
     $('#chart-container').hide();
     //show only landing page
-    $('#landing-page').show();
-/*    $('#portfolio-page').show();*/
+/*    $('#landing-page').show();*/
+    $('#portfolio-page').show();
 });
 
 $('#login-trigger').click(function(event) {
@@ -276,7 +276,7 @@ $("#login-form").submit(function (event) {
                 //display the results
                 console.log(result);
                 //show user assets on login
-                displayAssets(loginUserObject.email)              
+/*                displayAssets(loginUserObject.email) */             
                 //hide all the sections
                 $('section').hide();
                 $('.body').removeClass();
@@ -330,7 +330,7 @@ $("#add-asset").submit(function (event) {
                 contentType: 'application/json'
             })
             .done(function (result) {
-               console.log(result);
+                console.log(result);
                 alert('Asset added');
                 displayAssets(loggedInUser);
             })

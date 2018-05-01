@@ -190,7 +190,7 @@ app.post('/asset/create', (req, res) => {
 });
 
 // PUT --------------------------------------
-app.put('/achievement/:id', function (req, res) {
+app.put('/asset/:id', function (req, res) {
     let toUpdate = {};
     let updateableFields = ['name', 'value', 'target',];
     updateableFields.forEach(function(field) {
@@ -212,7 +212,7 @@ app.put('/achievement/:id', function (req, res) {
 
 
 
-// accessing a single achievement by id
+// accessing a single asset by id
 app.get('/asset/get/:user', function (req, res) {
     Asset.find({
             user: req.params.user

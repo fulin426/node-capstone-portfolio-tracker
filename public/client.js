@@ -87,7 +87,6 @@ function displayAssets(loggedInUser) {
                 console.log(result);
 
                 let buildTable = '';
-
                 buildTable += '<div class="results-header">';
                 buildTable += '<div class="header result-name">';
                 buildTable += '<p>Name</p>';
@@ -102,7 +101,8 @@ function displayAssets(loggedInUser) {
                 buildTable += '<p>Target %</p>';
                 buildTable += '</div>';
                 buildTable += '</div>';
-                
+
+
                 $.each(result, function (resulteKey, resulteValue) {
                     buildTable += '<div class="results-item">';
                     buildTable += ' <div class="item result-name">';
@@ -115,12 +115,16 @@ function displayAssets(loggedInUser) {
                     buildTable += '<input class="result-number" value="22"></input>';
                     buildTable += '</div>';
                     buildTable += '<div class="item target-percent">';
-                    buildTable += '<input class="result-number" value="' + resulteValue.target + '"></input>';
+                    buildTable += '<input class="target-number" value="' + resulteValue.target + '"></input>';
                     buildTable += '</div>';
+                    buildTable += '</div>';
+                    buildTable += '<div class="edit-delete-container">';
+                    buildTable += '<button class="edit-delete" id="edit-button">Edit</button>';
+                    buildTable += '<button class="edit-delete" id="delete-button">Delete</button>';
                     buildTable += '</div>';
                 });
-                let buildButton = '';
 
+                let buildButton = '';
                 buildButton += '<div class="analyze-button-container">';
                 buildButton += '<button type="submit" class="analyze-button">Analyze Portfolio</button>';
                 buildButton += '</div>';
@@ -271,6 +275,7 @@ $("#login-form").submit(function (event) {
 
                 //display the results
                 console.log(result);
+                //show user assets on login
                 displayAssets(loginUserObject.email)              
                 //hide all the sections
                 $('section').hide();
@@ -310,7 +315,6 @@ $("#add-asset").submit(function (event) {
         alert('Please add asset target');
     }
     else {
-
             const newAssetObject = {
                 name: addName,
                 value: addValue,
@@ -328,7 +332,6 @@ $("#add-asset").submit(function (event) {
             .done(function (result) {
                console.log(result);
                 alert('Asset added');
-
                 displayAssets(loggedInUser);
             })
             .fail(function (jqXHR, error, errorThrown) {
@@ -338,9 +341,57 @@ $("#add-asset").submit(function (event) {
             });
         }
 });
-
+//Analyze Button
 $('.results-container').on('click', '.analyze-button', function(event) {
 event.preventDefault();
     $('#chart-container').show();
 });
 
+//Toggle edit-delete buttons
+$('.results-container').on('click', '.results-item', function(event) {
+    $('.edit-delete-container').toggle();
+});
+
+//Edit button
+$('.results-container').on('click', '#edit-button', function(event) {
+    event.preventDefault();
+    console.log('edit');
+    const newName = $(event.target).closest('.results-item').find('.asset-name').val();
+    const newValue = $('.asset-value').val();
+    const newTarget = $('.target-input').val();
+    const loggedInUser = $('.loggedin-user').val();
+
+    const editAssetObject = {
+    name: newName,
+    value: newValue,
+    target: newTarget,
+    user: loggedInUser
+    };
+    console.log(editAssetObject);
+    
+    $.ajax({
+        type: 'PUT',
+        url: '/asset/:id',
+        dataType: 'json',
+        data: JSON.stringify(editAssetObject),
+        contentType: 'application/json'
+    })
+    .done(function (result) {
+       console.log(result);
+        alert('Asset edited');
+        displayAssets(loggedInUser);
+    })
+    .fail(function (jqXHR, error, errorThrown) {
+        console.log(jqXHR);
+        console.log(error);
+        console.log(errorThrown);
+    });
+});
+
+//delete button
+$('.results-container').on('click', '#delete-button', function(event) {
+    event.preventDefault();
+    let assetId = event.target.parentNode.id;
+    console.log(assetId);
+    console.log('deleting item');
+});

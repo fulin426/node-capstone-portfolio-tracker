@@ -354,9 +354,34 @@ legend {
 	text-align: right;
 }
 
+.target-number {
+	text-align: right;
+}
+
 #total {
 	text-align: right;
 	font-weight: 600;
+}
+.edit-delete-container {
+	align-items: flex-start;
+    text-align: center;
+}
+
+.edit-delete{
+	margin: 0 auto;
+	font-size: 18px;
+	height: 35px;
+	width: 18%;
+	display: inline-block;
+	margin: 3px 8px;
+}
+
+#edit-button {
+	background-color: green;
+}
+
+#delete-button {
+	background-color: red;
 }
 
 .analyze-button-container{

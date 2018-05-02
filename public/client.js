@@ -143,7 +143,10 @@ function displayAssets(loggedInUser) {
 $(document).ready(function () {
     //hide all the sections
     $('section').hide();
+    //hide pie chart
     $('#chart-container').hide();
+    //hide edit and delete buttons
+    $('.edit-delete-container').hide();
     //show only landing page
 /*    $('#landing-page').show();*/
     $('#portfolio-page').show();
@@ -151,37 +154,33 @@ $(document).ready(function () {
 
 $('#login-trigger').click(function(event) {
 event.preventDefault();
-    //hide all the sections
     $('section').hide();
     $('#chart-container').hide();
-    //show only login page
+    $('.edit-delete-container').hide();
     $('#login-page').show();
 });
 
 $('#sign-up-trigger').click(function(event) {
 event.preventDefault();
-    //hide all the sections
     $('section').hide();
     $('#chart-container').hide();
-    //show only signup page
+    $('.edit-delete-container').hide();    
     $('#signup-page').show();
 });
 
 $('#sigup-form-login-trigger').click(function(event) {
 event.preventDefault();
-    //hide all the sections
     $('section').hide();
     $('#chart-container').hide();
-    //show only login page
+    $('.edit-delete-container').hide();    
     $('#login-page').show();
 });
 
 $('#login-form-signup-trigger').click(function(event) {
 event.preventDefault();
-    //hide all the sections
     $('section').hide();
     $('#chart-container').hide();
-    //show only signup page
+    $('.edit-delete-container').hide();
     $('#signup-page').show();
 });
 //signup form submission trigger
@@ -343,13 +342,13 @@ $("#add-asset").submit(function (event) {
 });
 //Analyze Button
 $('.results-container').on('click', '.analyze-button', function(event) {
-event.preventDefault();
+    event.preventDefault();
     $('#chart-container').show();
 });
 
 //Toggle edit-delete buttons
-$('.results-container').on('click', '.results-item', function(event) {
-    $('.edit-delete-container').toggle();
+$('.results-container').on('click', '.results-wrapper', function(event) {
+    $(event.target).closest('.results-item').find('.edit-delete-container').toggle();
 });
 
 //Edit button
@@ -359,19 +358,19 @@ $('.results-container').on('click', '#edit-button', function(event) {
     const newName = $(event.target).closest('.results-item').find('.asset-name').val();
     const newValue = $('.asset-value').val();
     const newTarget = $('.target-input').val();
-    const loggedInUser = $('.loggedin-user').val();
-
+    let assetId = event.target.parentNode._id;
+    
     const editAssetObject = {
+    _id: assetId,
     name: newName,
     value: newValue,
     target: newTarget,
-    user: loggedInUser
     };
     console.log(editAssetObject);
     
     $.ajax({
         type: 'PUT',
-        url: '/asset/:id',
+        url: `/asset/${assetId}`,
         dataType: 'json',
         data: JSON.stringify(editAssetObject),
         contentType: 'application/json'
@@ -391,7 +390,13 @@ $('.results-container').on('click', '#edit-button', function(event) {
 //delete button
 $('.results-container').on('click', '#delete-button', function(event) {
     event.preventDefault();
-    let assetId = event.target.parentNode.id;
+    let assetId = event.target.parentNode._id;
     console.log(assetId);
     console.log('deleting item');
+
+/*    $.ajax({
+        type: 'DELETE',
+        url: `/asset/delete/${assetId}`,
+        success: displayAssets(),
+    });*/
 });

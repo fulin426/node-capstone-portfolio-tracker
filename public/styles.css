@@ -383,11 +383,11 @@ legend {
 }
 
 #edit-button {
-	background-color: green;
+	background-color: #339933;
 }
 
 #delete-button {
-	background-color: red;
+	background-color: #ff3333;
 }
 
 .analyze-button-container{

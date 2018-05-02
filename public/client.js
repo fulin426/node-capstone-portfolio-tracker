@@ -1,81 +1,3 @@
-// Build the chart
-function calculateCurrentPercentages() {
-    //determine the number of items
-    const numItems = $('.asset-value').length;
-    let total = 0;
-    let percentages=[];
-    //add up each value to get the total
-    for(i = 0; i < numItems; i++) {
-        total = parseInt(document.getElementsByClassName('asset-value')[i].value) + total;
-    }
-    //find the percentage of each asset and create an array
-    for(i = 0; i < numItems; i++) {
-        percentages.push(((document.getElementsByClassName('asset-value')[i].value)/total)*100);
-    }
-    return percentages;
-}
-currentPercentages = calculateCurrentPercentages();
-/*console.log(currentPercentages);*/
-
-//Create data for piechart
-function createPieChartData() {
-    //determine the number of items
-    const numItems = $('.asset-name').length;
-    const chartData = [];
-    //create chart data objects
-    for(i = 0; i < numItems; i++) {
-        chartData.push(`name: ${document.getElementsByClassName('asset-name')[i].value}, y: ${currentPercentages[i]}`);
-    }
-    return chartData;
-}
-const chartData = createPieChartData();
-/*console.log(chartData);*/
-Highcharts.chart('chart-container', {
-    chart: {
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
-        type: 'pie'
-    },
-    title: {
-        text: 'Portfolio Result'
-    },
-    tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-    },
-    plotOptions: {
-        pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-                enabled: false
-            },
-            showInLegend: true
-        }
-    },
-    series: [{
-        name: 'Assets',
-        colorByPoint: true,
-        data:[{
-            name: 'Vanguard Total Stock Market',
-            y: 22,
-        }, {
-            name: 'Vanguard Total International',
-            y: 38
-        }, {
-            name: 'Vanguard Total Bond Market',
-            y: 12
-        }, {
-            name: 'Schwab U.S. REIT ETF',
-            y: 20
-        }, {
-            name: 'Fidelity® Small Cap Growth Fund',
-            y: 8
-        }]
-    }]
-});
-
-
 function displayAssets(loggedInUser) {
     let result = $.ajax({
                 /* update API end point */
@@ -343,10 +265,81 @@ $("#add-asset").submit(function (event) {
             });
         }
 });
+
+// Build the chart
+//MDN rounding function 
+function precisionRound(number, precision) {
+    var factor = Math.pow(10, precision);
+    return Math.round(number * factor) / factor;
+}
+
+function calculateCurrentPercentages() {
+    //determine the number of items
+    const numItems = $('.asset-value').length;
+    let total = 0;
+    let percentages=[];
+    //add up each value to get the total
+    for(i = 0; i < numItems; i++) {
+        total = parseInt(document.getElementsByClassName('asset-value')[i].value) + total;
+    }
+    //find the percentage of each asset and create an array
+    for(i = 0; i < numItems; i++) {
+        percentages.push(((document.getElementsByClassName('asset-value')[i].value)/total)*100);
+        percentages = percentages.map(a => precisionRound(a, 2));
+    }
+    return percentages;
+}
+
+//Create an array for objects for chartdata
+function createPieChartData() {
+    //determine the number of items
+    const numItems = $('.asset-name').length;
+    const chartData = [];
+    const currentPercentages = calculateCurrentPercentages();
+    //create chart data objects
+    for(i = 0; i < numItems; i++) {
+        chartData.push({name: document.getElementsByClassName('asset-name')[i].value, y: currentPercentages[i]});
+    }
+    return chartData;
+}
+
 //Analyze Button
 $('.results-container').on('click', '.analyze-button', function(event) {
     event.preventDefault();
+    const chartData = createPieChartData();
+    const loggedInUser = $('.loggedin-user').val();
+    displayAssets(loggedInUser);
     $('#chart-container').show();
+    //Create Chart
+    Highcharts.chart('chart-container', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Portfolio Result'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: 'Assets',
+            colorByPoint: true,
+            data: chartData
+        }]
+    });
 });
 
 //Toggle edit-delete buttons
@@ -408,9 +401,9 @@ $('.results-container').on('click', '#delete-button', function(event) {
     console.log(assetId);
     console.log('deleting item');
 
-/*    $.ajax({
+    $.ajax({
         type: 'DELETE',
         url: `/asset/delete/${assetId}`,
         success: displayAssets(),
-    });*/
+    });
 });

@@ -9,20 +9,20 @@ function displayAssets(loggedInUser) {
                 console.log(result);
 
                 let buildTable = '';
-                buildTable += '<div class="results-header">';
-                buildTable += '<div class="header result-name">';
-                buildTable += '<p>Name</p>';
-                buildTable += '</div>';
-                buildTable += '<div class="header current-value">';
-                buildTable += '<p>Current Value $</p>';
-                buildTable += '</div>';
-                buildTable += '<div class="header current-percent">';
-                buildTable += '<p>Current %</p>';
-                buildTable += '</div>';
-                buildTable += '<div class="header target-percent">';
-                buildTable += '<p>Target %</p>';
-                buildTable += '</div>';
-                buildTable += '</div>';
+                    buildTable += '<div class="results-header">';
+                    buildTable += '<div class="header result-name">';
+                    buildTable += '<p>Name</p>';
+                    buildTable += '</div>';
+                    buildTable += '<div class="header current-value">';
+                    buildTable += '<p>Current Value $</p>';
+                    buildTable += '</div>';
+                    buildTable += '<div class="header current-percent">';
+                    buildTable += '<p>Current %</p>';
+                    buildTable += '</div>';
+                    buildTable += '<div class="header target-percent">';
+                    buildTable += '<p>Target %</p>';
+                    buildTable += '</div>';
+                    buildTable += '</div>';
 
 
                 $.each(result, function (resulteKey, resulteValue) {
@@ -35,7 +35,7 @@ function displayAssets(loggedInUser) {
                     buildTable += '<input class="asset-value" value="' + resulteValue.value + '"></input>';
                     buildTable += '</div>';
                     buildTable += ' <div class="item current-percent">';
-                    buildTable += '<input class="result-number" value="22"></input>';
+                    buildTable += '<input class="result-number"></input>';
                     buildTable += '</div>';
                     buildTable += '<div class="item target-percent">';
                     buildTable += '<input class="target-number" value="' + resulteValue.target + '"></input>';
@@ -47,13 +47,7 @@ function displayAssets(loggedInUser) {
                     buildTable += '</div>';
                     buildTable += '</div>';
                 });
-
-                let buildButton = '';
-                buildButton += '<div class="analyze-button-container">';
-                buildButton += '<button type="submit" class="analyze-button">Analyze Portfolio</button>';
-                buildButton += '</div>';
-
-                $('.results-container').html(buildTable + buildButton);
+                $('.results-container').html(buildTable);
                 $('.edit-delete-container').hide();
             })
             /* if the call is NOT successful show errors */
@@ -63,7 +57,6 @@ function displayAssets(loggedInUser) {
                 console.log(errorThrown);
             });
 }
-
 //when the page loads
 $(document).ready(function () {
     //hide all the sections
@@ -273,16 +266,35 @@ function precisionRound(number, precision) {
     return Math.round(number * factor) / factor;
 }
 
-function calculateCurrentPercentages() {
+function calculateTotalTargets () {
+    //determine the number of items
+    const numItems = $('.target-number').length;
+    let total = 0;
+    for (i = 0; i < numItems; i++) {
+        total = parseInt(document.getElementsByClassName('target-number')[i].value) + total;
+    }
+    //insert new calculated total into chart
+    $('#total-targets').val(total);
+    return total;
+}
+console.log(calculateTotalTargets());
+
+function calculateTotalAssets () {
     //determine the number of items
     const numItems = $('.asset-value').length;
     let total = 0;
-    let percentages=[];
-    //add up each value to get the total
-    for(i = 0; i < numItems; i++) {
+    for (i = 0; i < numItems; i++) {
         total = parseInt(document.getElementsByClassName('asset-value')[i].value) + total;
     }
-    //find the percentage of each asset and create an array
+    //insert new calculated total into chart
+    $('#total-assets').val(total);
+    return total;
+}
+
+function calculateCurrentPercentages() {
+    const numItems = $('.asset-value').length;
+    let total = calculateTotalAssets();
+    let percentages=[];
     for(i = 0; i < numItems; i++) {
         percentages.push(((document.getElementsByClassName('asset-value')[i].value)/total)*100);
         percentages = percentages.map(a => precisionRound(a, 2));
@@ -304,11 +316,13 @@ function createPieChartData() {
 }
 
 //Analyze Button
-$('.results-container').on('click', '.analyze-button', function(event) {
+$('.summary-container').on('click', '.analyze-button', function(event) {
     event.preventDefault();
     const chartData = createPieChartData();
     const loggedInUser = $('.loggedin-user').val();
     displayAssets(loggedInUser);
+    calculateTotalTargets();
+    calculateTotalAssets ();
     $('#chart-container').show();
     //Create Chart
     Highcharts.chart('chart-container', {

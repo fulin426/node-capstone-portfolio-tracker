@@ -105,7 +105,8 @@ function displayAssets(loggedInUser) {
 
                 $.each(result, function (resulteKey, resulteValue) {
                     buildTable += '<div class="results-item">';
-                    buildTable += ' <div class="item result-name">';
+                    buildTable += '<div class="results-wrapper">';
+                    buildTable += '<div class="item result-name">';
                     buildTable += '<input class="asset-name" value="' + resulteValue.name + '"></input>';
                     buildTable += '</div>';
                     buildTable += ' <div class="item current-value">';
@@ -122,6 +123,7 @@ function displayAssets(loggedInUser) {
                     buildTable += '<button class="edit-delete" id="edit-button">Edit</button>';
                     buildTable += '<button class="edit-delete" id="delete-button">Delete</button>';
                     buildTable += '</div>';
+                    buildTable += '</div>';
                 });
 
                 let buildButton = '';
@@ -130,6 +132,7 @@ function displayAssets(loggedInUser) {
                 buildButton += '</div>';
 
                 $('.results-container').html(buildTable + buildButton);
+                $('.edit-delete-container').hide();
             })
             /* if the call is NOT successful show errors */
             .fail(function (jqXHR, error, errorThrown) {
@@ -148,8 +151,8 @@ $(document).ready(function () {
     //hide edit and delete buttons
     $('.edit-delete-container').hide();
     //show only landing page
-/*    $('#landing-page').show();*/
-    $('#portfolio-page').show();
+    $('#landing-page').show();
+/*    $('#portfolio-page').show();*/
 });
 
 $('#login-trigger').click(function(event) {
@@ -275,7 +278,7 @@ $("#login-form").submit(function (event) {
                 //display the results
                 console.log(result);
                 //show user assets on login
-/*                displayAssets(loginUserObject.email) */             
+                displayAssets(loginUserObject.email)              
                 //hide all the sections
                 $('section').hide();
                 $('.body').removeClass();
@@ -354,43 +357,54 @@ $('.results-container').on('click', '.results-wrapper', function(event) {
 //Edit button
 $('.results-container').on('click', '#edit-button', function(event) {
     event.preventDefault();
-    console.log('edit');
+    console.log('editing asset');
     const newName = $(event.target).closest('.results-item').find('.asset-name').val();
-    const newValue = $('.asset-value').val();
-    const newTarget = $('.target-input').val();
-    let assetId = event.target.parentNode._id;
+    const newValue = $(event.target).closest('.results-item').find('.asset-value').val();
+    const newTarget = $(event.target).closest('.results-item').find('.target-number').val();
+    let assetId = event.target.parentNode.id;
     
-    const editAssetObject = {
-    _id: assetId,
-    name: newName,
-    value: newValue,
-    target: newTarget,
-    };
-    console.log(editAssetObject);
-    
-    $.ajax({
-        type: 'PUT',
-        url: `/asset/${assetId}`,
-        dataType: 'json',
-        data: JSON.stringify(editAssetObject),
-        contentType: 'application/json'
-    })
-    .done(function (result) {
-       console.log(result);
-        alert('Asset edited');
-        displayAssets(loggedInUser);
-    })
-    .fail(function (jqXHR, error, errorThrown) {
-        console.log(jqXHR);
-        console.log(error);
-        console.log(errorThrown);
-    });
+    if (newName == "") {
+        alert('Please add asset name');
+    } 
+    else if (newValue == "") {
+        alert('Please add asset value');
+    }
+    else if (newTarget == "") {
+        alert('Please add asset target');
+    }
+    else {
+        const editAssetObject = {
+        _id: assetId,
+        name: newName,
+        value: newValue,
+        target: newTarget,
+        };
+        console.log(editAssetObject);
+        
+        $.ajax({
+            type: 'PUT',
+            url: `/asset/${assetId}`,
+            dataType: 'json',
+            data: JSON.stringify(editAssetObject),
+            contentType: 'application/json'
+        })
+        .done(function (result) {
+           console.log(result);
+            alert('Asset edited');
+            displayAssets(loggedInUser);
+        })
+        .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+        });
+    }
 });
 
 //delete button
 $('.results-container').on('click', '#delete-button', function(event) {
     event.preventDefault();
-    let assetId = event.target.parentNode._id;
+    let assetId = event.target.parentNode.id;
     console.log(assetId);
     console.log('deleting item');
 

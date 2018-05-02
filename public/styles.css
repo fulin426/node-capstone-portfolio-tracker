@@ -90,12 +90,18 @@ li {
     font-size: 20px;
 }
 
-#home-link{
-	font-weight: 24px;
+#home-link {
+	color: white;
 }
 
+
+#home-link:hover {
+    color: black;
+}
 #welcome-user{
 	float: right;
+	color: white;
+	font-weight: bold;
 }
 #sign-up {
 	float: right;

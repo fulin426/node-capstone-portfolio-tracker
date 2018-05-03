@@ -1,4 +1,8 @@
 function displayAssets(loggedInUser) {
+
+    let totalAssets = $('#total-assets').val();
+
+    console.log(totalAssets);
     let result = $.ajax({
                 /* update API end point */
                 url: "/asset/get/"+ loggedInUser,
@@ -6,7 +10,7 @@ function displayAssets(loggedInUser) {
                 type: "GET"
             })
             .done(function (result) {               
-                /*console.log(result);*/
+                console.log(result);
 
                 let buildTable = '';
                     buildTable += '<div class="results-header">';
@@ -26,17 +30,29 @@ function displayAssets(loggedInUser) {
 
 
                 $.each(result, function (resulteKey, resulteValue) {
+
+                    /*
+                    Percentage logic
+                    parseFloat(totalAssets) ----------------------> 100%
+                    parseFloat(resulteValue.value)---------------->  X%
+
+
+                    X = (parseFloat(resulteValue.value) * 100) / parseFloat(totalAssets);
+                    */
+
+                    let currentPercent = (parseFloat(resulteValue.value) * 100) / parseFloat(totalAssets);
+
                     buildTable += '<div class="results-item">';
                     buildTable += '<div class="results-wrapper">';
                     buildTable += '<div class="item result-name">';
-                    buildTable += '<input type="hidden" name="asset-id" class="asset-id" value="">';
+                    buildTable += '<input type="hidden" name="asset-id" class="asset-id" value="' + resulteValue._id + '">';
                     buildTable += '<input class="asset-name" value="' + resulteValue.name + '"></input>';
                     buildTable += '</div>';
                     buildTable += ' <div class="item current-value">';
                     buildTable += '<input class="asset-value" value="' + resulteValue.value + '"></input>';
                     buildTable += '</div>';
                     buildTable += ' <div class="item current-percent">';
-                    buildTable += '<input class="result-number"></input>';
+                    buildTable += '<input class="result-number" value="' + Math.round(currentPercent) + '"></input>';
                     buildTable += '</div>';
                     buildTable += '<div class="item target-percent">';
                     buildTable += '<input class="target-number" value="' + resulteValue.target + '"></input>';
@@ -49,6 +65,10 @@ function displayAssets(loggedInUser) {
                     buildTable += '</div>';
                 });
                 $('.results-container').html(buildTable);
+
+                calculateTotalTargets();
+                calculateTotalAssets();
+
                 $('.edit-delete-container').hide();
             })
             /* if the call is NOT successful show errors */
@@ -194,7 +214,9 @@ $("#login-form").submit(function (event) {
                 //display the results
                 console.log(result);
                 //show user assets on login
-                displayAssets(loginUserObject.email)              
+                displayAssets(loginUserObject.email);
+                calculateTotalTargets();
+                calculateTotalAssets();            
                 //hide all the sections
                 $('section').hide();
                 $('.body').removeClass();
@@ -249,6 +271,8 @@ $("#add-asset").submit(function (event) {
             })
             .done(function (result) {
                 console.log(result._id);
+                calculateTotalTargets();
+                calculateTotalAssets();
                 displayAssets(loggedInUser);
                 $(event.target).closest('.results-item').find('.asset-id').val(result._id);
                 alert('Asset added');
@@ -280,13 +304,17 @@ function calculateTotalTargets () {
     return total;
 }
 
-function calculateTotalAssets () {
+function calculateTotalAssets() {
     //determine the number of items
     const numItems = $('.asset-value').length;
+    console.log("numItems = ", numItems);
     let total = 0;
     for (i = 0; i < numItems; i++) {
+        console.log("asset-value = ", parseInt(document.getElementsByClassName('asset-value')[i].value) );
+        //total = parseInt($('asset-value')[i].val()) + total;
         total = parseInt(document.getElementsByClassName('asset-value')[i].value) + total;
     }
+    console.log("total = ", total);
     //insert new calculated total into chart
     $('#total-assets').val(total);
     return total;
@@ -353,9 +381,10 @@ $('.summary-container').on('click', '.analyze-button', function(event) {
     event.preventDefault();
     const chartData = createPieChartData();
     const loggedInUser = $('.loggedin-user').val();
-    displayAssets(loggedInUser);
+    
     calculateTotalTargets();
-    calculateTotalAssets ();
+    calculateTotalAssets();
+    displayAssets(loggedInUser);
     $('#chart-container').show();
     //Create Chart
     highCharts(chartData);
@@ -369,12 +398,12 @@ $('.results-container').on('click', '.results-wrapper', function(event) {
 //Edit button
 $('.results-container').on('click', '#edit-button', function(event) {
     event.preventDefault();
-    console.log('editing asset');
+    
     const loggedInUser = $('.loggedin-user').val();
     const newName = $(event.target).closest('.results-item').find('.asset-name').val();
     const newValue = $(event.target).closest('.results-item').find('.asset-value').val();
     const newTarget = $(event.target).closest('.results-item').find('.target-number').val();
-    let assetId = '5aea707c2080ba1950d473a1';
+    let assetId = $(event.target).closest('.results-item').find('.asset-id').val();
     
     if (newName == "") {
         alert('Please add asset name');
@@ -386,24 +415,24 @@ $('.results-container').on('click', '#edit-button', function(event) {
         alert('Please add asset target');
     }
     else {
-        const editAssetObject = {
-        _id: assetId,
+        const editAssetObject = {       
         name: newName,
         value: newValue,
         target: newTarget,
         };
-        console.log(editAssetObject);
+        /*console.log(editAssetObject);*/
         
         $.ajax({
             type: 'PUT',
             url: `/asset/${assetId}`,
             dataType: 'json',
             data: JSON.stringify(editAssetObject),
-            contentType: 'application/json',
-            success: displayAssets(loggedInUser)
+            contentType: 'application/json'
         })
         .done(function (result) {
-            console.log(result);
+            /*console.log(result)*/;
+            calculateTotalTargets();
+            calculateTotalAssets();
             displayAssets(loggedInUser);
         })
         .fail(function (jqXHR, error, errorThrown) {
@@ -424,7 +453,17 @@ $('.results-container').on('click', '#delete-button', function(event) {
 
     $.ajax({
         type: 'DELETE',
-        url: `/asset/delete/${assetId}`,
-        success: displayAssets(loggedInUser)
-    });
+        url: `/asset/delete/${assetId}`
+    })
+    .done(function (result) {
+            /*console.log(result)*/;
+            calculateTotalTargets();
+            calculateTotalAssets();
+            displayAssets(loggedInUser);
+        })
+        .fail(function (jqXHR, error, errorThrown) {
+            console.log(jqXHR);
+            console.log(error);
+            console.log(errorThrown);
+        });
 });

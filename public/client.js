@@ -6,7 +6,7 @@ function displayAssets(loggedInUser) {
                 type: "GET"
             })
             .done(function (result) {               
-                console.log(result);
+                /*console.log(result);*/
 
                 let buildTable = '';
                     buildTable += '<div class="results-header">';
@@ -29,6 +29,7 @@ function displayAssets(loggedInUser) {
                     buildTable += '<div class="results-item">';
                     buildTable += '<div class="results-wrapper">';
                     buildTable += '<div class="item result-name">';
+                    buildTable += '<input type="hidden" name="asset-id" class="asset-id" value="">';
                     buildTable += '<input class="asset-name" value="' + resulteValue.name + '"></input>';
                     buildTable += '</div>';
                     buildTable += ' <div class="item current-value">';
@@ -110,7 +111,7 @@ $("#signup-form").submit(function (event) {
     const email = $('#signup-email').val();
     const password = $('#signup-password').val();
 
-    //validtae the input
+    //validate the input
         if (email === '') {
             alert('Please Add Valid Email');
         } else if (password === '') {
@@ -247,9 +248,10 @@ $("#add-asset").submit(function (event) {
                 contentType: 'application/json'
             })
             .done(function (result) {
-                console.log(result);
-                alert('Asset added');
+                console.log(result._id);
                 displayAssets(loggedInUser);
+                $(event.target).closest('.results-item').find('.asset-id').val(result._id);
+                alert('Asset added');
             })
             .fail(function (jqXHR, error, errorThrown) {
                 console.log(jqXHR);
@@ -277,7 +279,6 @@ function calculateTotalTargets () {
     $('#total-targets').val(total);
     return total;
 }
-console.log(calculateTotalTargets());
 
 function calculateTotalAssets () {
     //determine the number of items
@@ -315,16 +316,7 @@ function createPieChartData() {
     return chartData;
 }
 
-//Analyze Button
-$('.summary-container').on('click', '.analyze-button', function(event) {
-    event.preventDefault();
-    const chartData = createPieChartData();
-    const loggedInUser = $('.loggedin-user').val();
-    displayAssets(loggedInUser);
-    calculateTotalTargets();
-    calculateTotalAssets ();
-    $('#chart-container').show();
-    //Create Chart
+function highCharts(chartData) {
     Highcharts.chart('chart-container', {
         chart: {
             plotBackgroundColor: null,
@@ -354,6 +346,19 @@ $('.summary-container').on('click', '.analyze-button', function(event) {
             data: chartData
         }]
     });
+}
+
+//Analyze Button
+$('.summary-container').on('click', '.analyze-button', function(event) {
+    event.preventDefault();
+    const chartData = createPieChartData();
+    const loggedInUser = $('.loggedin-user').val();
+    displayAssets(loggedInUser);
+    calculateTotalTargets();
+    calculateTotalAssets ();
+    $('#chart-container').show();
+    //Create Chart
+    highCharts(chartData);
 });
 
 //Toggle edit-delete buttons
@@ -368,7 +373,7 @@ $('.results-container').on('click', '#edit-button', function(event) {
     const newName = $(event.target).closest('.results-item').find('.asset-name').val();
     const newValue = $(event.target).closest('.results-item').find('.asset-value').val();
     const newTarget = $(event.target).closest('.results-item').find('.target-number').val();
-    let assetId = event.target.parentNode.id;
+    let assetId = $(event.target).closest('.results-item').find('.asset-id').val();
     
     if (newName == "") {
         alert('Please add asset name');
@@ -411,13 +416,14 @@ $('.results-container').on('click', '#edit-button', function(event) {
 //delete button
 $('.results-container').on('click', '#delete-button', function(event) {
     event.preventDefault();
-    let assetId = event.target.parentNode.id;
+    const loggedInUser = $('.loggedin-user').val();
+    let assetId = '5aea71c7b251eb0a907f5445';
     console.log(assetId);
     console.log('deleting item');
 
     $.ajax({
         type: 'DELETE',
         url: `/asset/delete/${assetId}`,
-        success: displayAssets(),
+        success: displayAssets(loggedInUser)
     });
 });

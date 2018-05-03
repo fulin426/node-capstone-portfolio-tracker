@@ -370,10 +370,11 @@ $('.results-container').on('click', '.results-wrapper', function(event) {
 $('.results-container').on('click', '#edit-button', function(event) {
     event.preventDefault();
     console.log('editing asset');
+    const loggedInUser = $('.loggedin-user').val();
     const newName = $(event.target).closest('.results-item').find('.asset-name').val();
     const newValue = $(event.target).closest('.results-item').find('.asset-value').val();
     const newTarget = $(event.target).closest('.results-item').find('.target-number').val();
-    let assetId = $(event.target).closest('.results-item').find('.asset-id').val();
+    let assetId = '5aea707c2080ba1950d473a1';
     
     if (newName == "") {
         alert('Please add asset name');
@@ -398,11 +399,11 @@ $('.results-container').on('click', '#edit-button', function(event) {
             url: `/asset/${assetId}`,
             dataType: 'json',
             data: JSON.stringify(editAssetObject),
-            contentType: 'application/json'
+            contentType: 'application/json',
+            success: displayAssets(loggedInUser)
         })
         .done(function (result) {
-           console.log(result);
-            alert('Asset edited');
+            console.log(result);
             displayAssets(loggedInUser);
         })
         .fail(function (jqXHR, error, errorThrown) {
@@ -417,7 +418,7 @@ $('.results-container').on('click', '#edit-button', function(event) {
 $('.results-container').on('click', '#delete-button', function(event) {
     event.preventDefault();
     const loggedInUser = $('.loggedin-user').val();
-    let assetId = '5aea71c7b251eb0a907f5445';
+    let assetId = '5aea707c2080ba1950d473a1';
     console.log(assetId);
     console.log('deleting item');
 

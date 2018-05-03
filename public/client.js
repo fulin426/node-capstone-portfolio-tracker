@@ -447,7 +447,7 @@ $('.results-container').on('click', '#edit-button', function(event) {
 $('.results-container').on('click', '#delete-button', function(event) {
     event.preventDefault();
     const loggedInUser = $('.loggedin-user').val();
-    let assetId = '5aea707c2080ba1950d473a1';
+    let assetId = $(event.target).closest('.results-item').find('.asset-id').val();
     console.log(assetId);
     console.log('deleting item');
 

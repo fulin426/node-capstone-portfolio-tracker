@@ -10,13 +10,10 @@ $(document).ready(function () {
     $('#landing-page').show();
 });
 
-//Directs user to landing page home
-$('home-link').click(function(event) {
+//Reloads page to landing page
+$('#home-link').click(function(event) {
 event.preventDefault();
-    $('section').hide();
-    $('#chart-container').hide();
-    $('.edit-delete-container').hide();
-    $('#landing-page').show();
+    location.reload();
 });
 
 $('#login-trigger').click(function(event) {
@@ -142,7 +139,7 @@ $("#login-form").submit(function (event) {
                 calculateTotalAssets();            
                 //hide all the sections
                 $('section').hide();
-                $('.body').removeClass();
+                $('body').removeClass();
                 $('#chart-container').hide();
                 $('footer').hide();
                 //show only portfolio page related items

@@ -26,13 +26,8 @@
 }
 
 a:link {
-	text-decoration: none;
 	color: #bf5050;
 	font-weight: bold;
-}
-
-a:hover {
-    color: black;
 }
 
 .body {
@@ -100,20 +95,19 @@ li {
 
 #home-link {
     color: white;
+    text-decoration: none;
 }
 
 #home-link:hover {
     color: black;
+    
 }
 
 #welcome-user{
 	font-weight: bold;
 	float: right;
+	color: white;
 }
-
-/*#Logout-link{
-	float: right;
-}*/
 
 #sign-up {
 	float: right;

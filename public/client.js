@@ -6,9 +6,10 @@ $(document).ready(function () {
     $('#chart-container').hide();
     //hide edit and delete buttons
     $('.edit-delete-container').hide();
+    //hide user log out
+    $('#Logout-link').hide();
     //show only landing page
     $('#landing-page').show();
-/*    $('#portfolio-page').show();*/
 });
 
 $('#login-trigger').click(function(event) {
@@ -137,8 +138,9 @@ $("#login-form").submit(function (event) {
                 $('.body').removeClass();
                 $('#chart-container').hide();
                 $('footer').hide();
-                //show only portfolio page and welcome user
+                //show only portfolio page related items
                 $('#portfolio-page').show();
+                $('#Logout-link').show();
                 $('#welcome-user').text(`Welcome User ${result.email}`);
                 $('.loggedin-user').val(result.email);
                 
@@ -148,13 +150,13 @@ $("#login-form").submit(function (event) {
                 console.log(jqXHR);
                 console.log(error);
                 console.log(errorThrown);
+                alert('Please Check Username and Password');
             });
         };
 });
 
 $("#add-asset").submit(function (event) { 
     event.preventDefault();
-    console.log('adding asset');
     const addName = $('.name-input').val();
     const addValue = $('.value-input').val();
     const addTarget = $('.target-input').val();
@@ -176,7 +178,6 @@ $("#add-asset").submit(function (event) {
                 target: addTarget,
                 user: loggedInUser
             };
-            console.log(newAssetObject);
             $.ajax({
                 type: 'POST',
                 url: '/asset/create',
@@ -184,8 +185,7 @@ $("#add-asset").submit(function (event) {
                 data: JSON.stringify(newAssetObject),
                 contentType: 'application/json'
             })
-            .done(function (result) {
-                console.log(result._id);
+            .done(function(result) {
                 calculateTotalTargets();
                 calculateTotalAssets();
                 displayAssets(loggedInUser);
@@ -204,10 +204,8 @@ $("#add-asset").submit(function (event) {
 });
 
 function displayAssets(loggedInUser) {
-
     let totalAssets = $('#total-assets').val();
 
-    console.log(totalAssets);
     let result = $.ajax({
                 /* update API end point */
                 url: "/asset/get/"+ loggedInUser,
@@ -215,7 +213,6 @@ function displayAssets(loggedInUser) {
                 type: "GET"
             })
             .done(function (result) {               
-                console.log(result);
                 let buildTable = '';
                     buildTable += '<div class="results-header">';
                     buildTable += '<div class="header result-name">';
@@ -322,7 +319,6 @@ function calculateCurrentPercentages() {
         percentages.push(((document.getElementsByClassName('asset-value')[i].value)/total)*100);
         percentages = percentages.map(a => precisionRound(a, 1));
     }
-    console.log(percentages);
     return percentages;
 }
 
@@ -432,8 +428,6 @@ $('.results-container').on('click', '#edit-button', function(event) {
         value: newValue,
         target: newTarget,
         };
-        /*console.log(editAssetObject);*/
-        
         $.ajax({
             type: 'PUT',
             url: `/asset/${assetId}`,
@@ -442,7 +436,6 @@ $('.results-container').on('click', '#edit-button', function(event) {
             contentType: 'application/json'
         })
         .done(function (result) {
-            /*console.log(result)*/;
             calculateTotalTargets();
             calculateTotalAssets();
             insertCurrentPercentages()
@@ -461,15 +454,11 @@ $('.results-container').on('click', '#delete-button', function(event) {
     event.preventDefault();
     const loggedInUser = $('.loggedin-user').val();
     let assetId = $(event.target).closest('.results-item').find('.asset-id').val();
-    console.log(assetId);
-    console.log('deleting item');
-
     $.ajax({
         type: 'DELETE',
         url: `/asset/delete/${assetId}`
     })
     .done(function (result) {
-            /*console.log(result)*/;
             calculateTotalTargets();
             calculateTotalAssets();
             insertCurrentPercentages()

@@ -90,8 +90,12 @@ li {
     font-size: 20px;
 }
 
-#home-link {
+.nav_link {
 	color: white;
+}
+
+.nav-item {
+	text-align: center;
 }
 
 
@@ -99,10 +103,14 @@ li {
     color: black;
 }
 #welcome-user{
-	float: right;
-	color: white;
 	font-weight: bold;
+	text-align: center;
 }
+
+#Logout-link{
+	float: right;
+}
+
 #sign-up {
 	float: right;
 	font-weight: 20px;
@@ -366,7 +374,7 @@ legend {
 }
 
 #total-current-percent{
-	margin-right: -5px;
+	margin-right: -4px;
 }
 
 .edit-delete-container {

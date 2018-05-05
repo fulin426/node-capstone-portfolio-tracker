@@ -18,6 +18,9 @@
 					<a class="nav_link" id="welcome-user"></a>
 					<input type="hidden" name="loggedin-user" class="loggedin-user" value="">
 				</li>
+				<li class="nav-item">
+					<a href= "#" class="nav_link" id="Logout-link">Log Out</a>
+				</li>
 			</ul>
 		</div>
 	</div>
@@ -39,7 +42,8 @@
 				<form id="login-form" class="signup-login-form" role="form">
 					<fieldset class="labels-inputs">
 						<legend>Log In</legend>
-						<p id="intro">Keep Track of your portfolio</p>
+						<p>email: demo@demo.com</p>
+						<p>password: 123</p>
 						<div class="labels-inputs-container">
 							<label class="signup-label">Email:</label>
 							<input id="login-email"  type="email" placeholder="demo@demo.com" class="signup-input" required value="demo@demo.com" />
@@ -86,15 +90,15 @@
 						<p id="add-new-asset">New Asset</p>
 						<div class="header name-container">
 							<label class="new name">Name</label>
-							<input class="name-input" placeholder="Vanguard SP 500" required value=""/>
+							<input class="name-input" placeholder="Vanguard SP 500" value=""/>
 						</div>
 						<div class="header current-container">
 							<label class="new current">Current Value $</label>
-							<input class="value-input" placeholder="88000" required required value=""/>
+							<input class="value-input" value=""/>
 						</div>
 						<div class="header target-container">
 							<label class="new target">Target %</label>
-							<input class="target-input" placeholder="20" required required value=""/>
+							<input class="target-input" value=""/>
 						</div>
 					<div class="submit-button-container">
 						<button type="submit" class="add-button">Add</button>

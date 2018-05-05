@@ -390,9 +390,14 @@ $('.summary-container').on('click', '.analyze-button', function(event) {
     highCharts(chartData);
 });
 
-//Toggle edit-delete buttons
+//Show edit-delete buttons
 $('.results-container').on('click', '.results-wrapper', function(event) {
-    $(event.target).closest('.results-item').find('.edit-delete-container').toggle();
+    $(event.target).closest('.results-item').find('.edit-delete-container').show();
+});
+
+//Hide edit-delete buttons
+$('.results-container').on('click', '.edit-delete-container', function(event) {
+    $(event.target).closest('.results-item').find('.edit-delete-container').hide();
 });
 
 //Edit button

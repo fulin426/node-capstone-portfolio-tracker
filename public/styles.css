@@ -98,10 +98,14 @@ li {
 	text-align: center;
 }
 
+#home-link {
+    color: white;
+}
 
 #home-link:hover {
     color: black;
 }
+
 #welcome-user{
 	font-weight: bold;
 	text-align: center;

@@ -1,83 +1,3 @@
-function displayAssets(loggedInUser) {
-
-    let totalAssets = $('#total-assets').val();
-
-    console.log(totalAssets);
-    let result = $.ajax({
-                /* update API end point */
-                url: "/asset/get/"+ loggedInUser,
-                dataType: "json",
-                type: "GET"
-            })
-            .done(function (result) {               
-                console.log(result);
-
-                let buildTable = '';
-                    buildTable += '<div class="results-header">';
-                    buildTable += '<div class="header result-name">';
-                    buildTable += '<p>Name</p>';
-                    buildTable += '</div>';
-                    buildTable += '<div class="header current-value">';
-                    buildTable += '<p>Current Value $</p>';
-                    buildTable += '</div>';
-                    buildTable += '<div class="header current-percent">';
-                    buildTable += '<p>Current %</p>';
-                    buildTable += '</div>';
-                    buildTable += '<div class="header target-percent">';
-                    buildTable += '<p>Target %</p>';
-                    buildTable += '</div>';
-                    buildTable += '</div>';
-
-
-                $.each(result, function (resulteKey, resulteValue) {
-
-                    /*
-                    Percentage logic
-                    parseFloat(totalAssets) ----------------------> 100%
-                    parseFloat(resulteValue.value)---------------->  X%
-
-
-                    X = (parseFloat(resulteValue.value) * 100) / parseFloat(totalAssets);
-                    */
-
-                    let currentPercent = (parseFloat(resulteValue.value) * 100) / parseFloat(totalAssets);
-
-                    buildTable += '<div class="results-item">';
-                    buildTable += '<div class="results-wrapper">';
-                    buildTable += '<div class="item result-name">';
-                    buildTable += '<input type="hidden" name="asset-id" class="asset-id" value="' + resulteValue._id + '">';
-                    buildTable += '<input class="asset-name" value="' + resulteValue.name + '"></input>';
-                    buildTable += '</div>';
-                    buildTable += ' <div class="item current-value">';
-                    buildTable += '<input class="asset-value" value="' + resulteValue.value + '"></input>';
-                    buildTable += '</div>';
-                    buildTable += ' <div class="item current-percent">';
-                    buildTable += '<input class="result-number" value="' + Math.round(currentPercent) + '"></input>';
-                    buildTable += '</div>';
-                    buildTable += '<div class="item target-percent">';
-                    buildTable += '<input class="target-number" value="' + resulteValue.target + '"></input>';
-                    buildTable += '</div>';
-                    buildTable += '</div>';
-                    buildTable += '<div class="edit-delete-container">';
-                    buildTable += '<button class="edit-delete" id="edit-button">Edit</button>';
-                    buildTable += '<button class="edit-delete" id="delete-button">Delete</button>';
-                    buildTable += '</div>';
-                    buildTable += '</div>';
-                });
-                $('.results-container').html(buildTable);
-
-                calculateTotalTargets();
-                calculateTotalAssets();
-
-                $('.edit-delete-container').hide();
-            })
-            /* if the call is NOT successful show errors */
-            .fail(function (jqXHR, error, errorThrown) {
-                console.log(jqXHR);
-                console.log(error);
-                console.log(errorThrown);
-            });
-}
 //when the page loads
 $(document).ready(function () {
     //hide all the sections
@@ -196,9 +116,6 @@ $("#login-form").submit(function (event) {
                 email: email,
                 password: password
             };
-            console.log(loginUserObject);
-
-
             // send the user object to the api call
             $.ajax({
                 type: 'POST',
@@ -207,10 +124,8 @@ $("#login-form").submit(function (event) {
                 data: JSON.stringify(loginUserObject),
                 contentType: 'application/json'
             })
-
             //if the api call is succefull
             .done(function (result) {
-
                 //display the results
                 console.log(result);
                 //show user assets on login
@@ -276,6 +191,9 @@ $("#add-asset").submit(function (event) {
                 displayAssets(loggedInUser);
                 $(event.target).closest('.results-item').find('.asset-id').val(result._id);
                 alert('Asset added');
+                const addName = $('.name-input').val('');
+                const addValue = $('.value-input').val('');
+                const addTarget = $('.target-input').val('');
             })
             .fail(function (jqXHR, error, errorThrown) {
                 console.log(jqXHR);
@@ -285,7 +203,87 @@ $("#add-asset").submit(function (event) {
         }
 });
 
-// Build the chart
+function displayAssets(loggedInUser) {
+
+    let totalAssets = $('#total-assets').val();
+
+    console.log(totalAssets);
+    let result = $.ajax({
+                /* update API end point */
+                url: "/asset/get/"+ loggedInUser,
+                dataType: "json",
+                type: "GET"
+            })
+            .done(function (result) {               
+                console.log(result);
+                let buildTable = '';
+                    buildTable += '<div class="results-header">';
+                    buildTable += '<div class="header result-name">';
+                    buildTable += '<p>Name</p>';
+                    buildTable += '</div>';
+                    buildTable += '<div class="header current-value">';
+                    buildTable += '<p>Current Value $</p>';
+                    buildTable += '</div>';
+                    buildTable += '<div class="header current-percent">';
+                    buildTable += '<p>Current %</p>';
+                    buildTable += '</div>';
+                    buildTable += '<div class="header target-percent">';
+                    buildTable += '<p>Target %</p>';
+                    buildTable += '</div>';
+                    buildTable += '</div>';
+
+
+                $.each(result, function (resulteKey, resulteValue) {
+
+                    /*
+                    Percentage logic
+                    parseFloat(totalAssets) ----------------------> 100%
+                    parseFloat(resulteValue.value)---------------->  X%
+
+
+                    X = (parseFloat(resulteValue.value) * 100) / parseFloat(totalAssets);
+                    */
+
+                    let currentPercent = (parseFloat(resulteValue.value) * 100) / parseFloat(totalAssets);
+
+                    buildTable += '<div class="results-item">';
+                    buildTable += '<div class="results-wrapper">';
+                    buildTable += '<div class="item result-name">';
+                    buildTable += '<input type="hidden" name="asset-id" class="asset-id" value="' + resulteValue._id + '">';
+                    buildTable += '<input class="asset-name" value="' + resulteValue.name + '"></input>';
+                    buildTable += '</div>';
+                    buildTable += ' <div class="item current-value">';
+                    buildTable += '<input class="asset-value" value="' + resulteValue.value + '"></input>';
+                    buildTable += '</div>';
+                    buildTable += ' <div class="item current-percent">';
+                    buildTable += '<input class="percentage-number" value=""></input>';
+                    buildTable += '</div>';
+                    buildTable += '<div class="item target-percent">';
+                    buildTable += '<input class="target-number" value="' + resulteValue.target + '"></input>';
+                    buildTable += '</div>';
+                    buildTable += '</div>';
+                    buildTable += '<div class="edit-delete-container">';
+                    buildTable += '<button class="edit-delete" id="edit-button">Edit</button>';
+                    buildTable += '<button class="edit-delete" id="delete-button">Delete</button>';
+                    buildTable += '</div>';
+                    buildTable += '</div>';
+                });
+
+                $('.results-container').html(buildTable);
+                calculateTotalTargets();
+                calculateTotalAssets();
+                insertCurrentPercentages()
+                $('.edit-delete-container').hide();
+            })
+            /* if the call is NOT successful show errors */
+            .fail(function (jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
+            });
+}
+
+// Build chart and Calculations
 //MDN rounding function 
 function precisionRound(number, precision) {
     var factor = Math.pow(10, precision);
@@ -297,7 +295,7 @@ function calculateTotalTargets () {
     const numItems = $('.target-number').length;
     let total = 0;
     for (i = 0; i < numItems; i++) {
-        total = parseInt(document.getElementsByClassName('target-number')[i].value) + total;
+        total += parseInt(document.getElementsByClassName('target-number')[i].value);
     }
     //insert new calculated total into chart
     $('#total-targets').val(total);
@@ -307,14 +305,10 @@ function calculateTotalTargets () {
 function calculateTotalAssets() {
     //determine the number of items
     const numItems = $('.asset-value').length;
-    console.log("numItems = ", numItems);
     let total = 0;
     for (i = 0; i < numItems; i++) {
-        console.log("asset-value = ", parseInt(document.getElementsByClassName('asset-value')[i].value) );
-        //total = parseInt($('asset-value')[i].val()) + total;
-        total = parseInt(document.getElementsByClassName('asset-value')[i].value) + total;
+        total += parseInt(document.getElementsByClassName('asset-value')[i].value);
     }
-    console.log("total = ", total);
     //insert new calculated total into chart
     $('#total-assets').val(total);
     return total;
@@ -326,9 +320,18 @@ function calculateCurrentPercentages() {
     let percentages=[];
     for(i = 0; i < numItems; i++) {
         percentages.push(((document.getElementsByClassName('asset-value')[i].value)/total)*100);
-        percentages = percentages.map(a => precisionRound(a, 2));
+        percentages = percentages.map(a => precisionRound(a, 1));
     }
+    console.log(percentages);
     return percentages;
+}
+
+function insertCurrentPercentages() {
+    const numItems = $('.asset-value').length;
+    let percentages = calculateCurrentPercentages();
+    for(i = 0; i < numItems; i++) {
+        document.getElementsByClassName('percentage-number')[i].value  = percentages[i];
+    }
 }
 
 //Create an array for objects for chartdata
@@ -381,13 +384,17 @@ $('.summary-container').on('click', '.analyze-button', function(event) {
     event.preventDefault();
     const chartData = createPieChartData();
     const loggedInUser = $('.loggedin-user').val();
-    
+    let percentageTotal = calculateTotalTargets(); 
+    displayAssets(loggedInUser);
     calculateTotalTargets();
     calculateTotalAssets();
-    displayAssets(loggedInUser);
-    $('#chart-container').show();
+    insertCurrentPercentages()
     //Create Chart
     highCharts(chartData);
+    $('#chart-container').show();
+        if (percentageTotal != 100){
+        alert('Please Make Sure Target Adds up to 100%');
+    }
 });
 
 //Show edit-delete buttons
@@ -438,6 +445,7 @@ $('.results-container').on('click', '#edit-button', function(event) {
             /*console.log(result)*/;
             calculateTotalTargets();
             calculateTotalAssets();
+            insertCurrentPercentages()
             displayAssets(loggedInUser);
         })
         .fail(function (jqXHR, error, errorThrown) {
@@ -464,6 +472,7 @@ $('.results-container').on('click', '#delete-button', function(event) {
             /*console.log(result)*/;
             calculateTotalTargets();
             calculateTotalAssets();
+            insertCurrentPercentages()
             displayAssets(loggedInUser);
         })
         .fail(function (jqXHR, error, errorThrown) {

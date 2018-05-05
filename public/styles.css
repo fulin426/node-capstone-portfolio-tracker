@@ -356,11 +356,7 @@ legend {
 	padding: 5px;
 }
 
-.result-number {
-	text-align: right;
-}
-
-.target-number {
+.target-number,.percentage-number,.target-number,.result-number {
 	text-align: right;
 }
 
@@ -368,6 +364,11 @@ legend {
 	text-align: right;
 	font-weight: 600;
 }
+
+#total-current-percent{
+	margin-right: -5px;
+}
+
 .edit-delete-container {
 	align-items: flex-start;
     text-align: center;

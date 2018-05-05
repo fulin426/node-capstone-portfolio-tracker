@@ -6,9 +6,16 @@ $(document).ready(function () {
     $('#chart-container').hide();
     //hide edit and delete buttons
     $('.edit-delete-container').hide();
-    //hide user log out
-    $('#Logout-link').hide();
     //show only landing page
+    $('#landing-page').show();
+});
+
+//Directs user to landing page home
+$('home-link').click(function(event) {
+event.preventDefault();
+    $('section').hide();
+    $('#chart-container').hide();
+    $('.edit-delete-container').hide();
     $('#landing-page').show();
 });
 
@@ -140,7 +147,6 @@ $("#login-form").submit(function (event) {
                 $('footer').hide();
                 //show only portfolio page related items
                 $('#portfolio-page').show();
-                $('#Logout-link').show();
                 $('#welcome-user').text(`Welcome User ${result.email}`);
                 $('.loggedin-user').val(result.email);
                 

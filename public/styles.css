@@ -108,12 +108,12 @@ li {
 
 #welcome-user{
 	font-weight: bold;
-	text-align: center;
-}
-
-#Logout-link{
 	float: right;
 }
+
+/*#Logout-link{
+	float: right;
+}*/
 
 #sign-up {
 	float: right;

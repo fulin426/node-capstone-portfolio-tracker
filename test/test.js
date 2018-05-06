@@ -195,14 +195,42 @@ describe('API resource', function() {
 				})
 				.then(function(asset) {
 					expect(asset.name).to.equal(updateData.name);
-					expect(asset.value).to.equal(updateData.value);
-					expect(asset.target).to.equal(updateData.target);
+					expect(parseInt(asset.value)).to.equal(updateData.value);
+					expect(parseInt(asset.target)).to.equal(updateData.target);
 
 				});
 		});
 	});			
 
+  describe('DELETE endpoint', function () {
+    // strategy:
+    //  1. get a post
+    //  2. make a DELETE request for that post's id
+    //  3. assert that response has right status code
+    //  4. prove that post with the id doesn't exist in db anymore
+    it('should delete a post by id', function () {
 
+      let asset;
+
+      return Asset
+        .findOne()
+        .then(_asset => {
+          asset = _asset;
+          return chai.request(app).delete(`/asset/delete/${asset.id}`);
+        })
+        .then(res => {
+          res.should.have.status(204);
+          return Asset.findById(asset.id);
+        })
+        .then(_asset => {
+          // when a variable's value is null, chaining `should`
+          // doesn't work. so `_post.should.be.null` would raise
+          // an error. `should.be.null(_post)` is how we can
+          // make assertions about a null value.
+          should.not.exist(_asset);
+        });
+    });
+    });
 
 
   });

@@ -193,9 +193,11 @@ describe('API resource', function() {
 					res.should.have.status(204);
 					return Asset.findById(updateData.id);
 				})
-				.then(function(achievement) {
-/*					achievement.achieveWhat.should.equal(updateData.achieveWhat);
-					achievement.achieveWhy.should.equal(updateData.achieveWhy);*/
+				.then(function(asset) {
+					expect(asset.name).to.equal(updateData.name);
+					expect(asset.value).to.equal(updateData.value);
+					expect(asset.target).to.equal(updateData.target);
+
 				});
 		});
 	});			

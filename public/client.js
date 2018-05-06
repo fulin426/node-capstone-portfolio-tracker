@@ -70,7 +70,6 @@ $("#signup-form").submit(function (event) {
                 email: email,
                 password: password
             };
-            console.log(newUserObject);
             // send the user object to the api call
             $.ajax({
                 type: 'POST',
@@ -84,7 +83,7 @@ $("#signup-form").submit(function (event) {
             .done(function (result) {
 
                 //display the results
-                console.log(result);               
+                alert(`${result.email} created`);               
                 //hide all the sections
                 $('section').hide();
                 $('#chart-container').hide();
@@ -193,7 +192,6 @@ $("#add-asset").submit(function (event) {
                 calculateTotalAssets();
                 displayAssets(loggedInUser);
                 $(event.target).closest('.results-item').find('.asset-id').val(result._id);
-                alert('Asset added');
                 const addName = $('.name-input').val('');
                 const addValue = $('.value-input').val('');
                 const addTarget = $('.target-input').val('');

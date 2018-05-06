@@ -212,7 +212,7 @@ app.put('/asset/:id', function (req, res) {
 
 
 
-// accessing a single asset by id
+// ACCESING A SINGLE ASSET BY ID
 app.get('/asset/get/:user', function (req, res) {
     Asset.find({
             user: req.params.user

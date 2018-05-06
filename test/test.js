@@ -4,8 +4,10 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const faker = require('faker');
 const mongoose = require('mongoose');
+
 //expect syntax in module
 const expect = chai.expect;
+const should = chai.should();
 
 const { DATABASE_URL, PORT } = require('../config');
 const { TEST_DATABASE_URL } = require('../config');
@@ -26,6 +28,15 @@ function seedAssetData() {
 }
 
 //insert data into mongo
+const testUsername = faker.random.word() + faker.random.number();
+
+function generateUserData() {
+	return {
+		email: `${testUsername}@${faker.random.word()}.com`,
+		password: faker.random.word()
+	}
+}
+
 function generateAssetName() {
   const assetName = ['SP 500','Cash','Real Estate','Total Bond','Dividend Yield'];
   return assetName[Math.floor(Math.random() * assetName.length)];
@@ -46,16 +57,22 @@ function generateAssetData() {
   return {
     name: generateAssetName(),
     value: generateCurrentValue(),
-    target: generateTargetPercentage()
+    target: generateTargetPercentage(),
+    user: testUsername
   };
 }
 
 //delete entire database
 //ensure data does not stick around for next one
 function tearDownDb() {
-  console.warn('Deleting database');
-  return mongoose.connection.dropDatabase();
+  return new Promise((resolve, reject) => {
+    console.warn('Deleting database');
+    mongoose.connection.dropDatabase()
+      .then(result => resolve(result))
+      .catch(err => reject(err));
+  });
 }
+
 
 //hook functions to return a promise
 // before and after functions
@@ -79,35 +96,64 @@ describe('API resource', function() {
 
   //GET
   describe('GET ENDPOINT', function() {
-    it('should return current portfolio assets', function() {
+    it('should return all portfolio assets', function() {
       //general response
       let res;
       return chai.request(app)
-        .get('/asset/get/demo@demo.com')
+        .get(`/asset/get/${testUsername}`)
         //_res a local variable
         .then(function(_res) {
-          //change the value of global variable
-          console.log(_res);
-          res = _res;
-          //available to use futher down
-          expect(res).to.have.status(200);
-/*          expect(res.body).to.have.length.of.at.least(1);*/
-          return Asset.count();
+		    //change the value of global variable
+		    res = _res;
+		    //available to use futher down
+		    expect(res).to.have.status(200);
+		    expect(res.body).to.have.length.of.at.least(1);
+		    return Asset.count();
         })
-/*        .then(function(count) {
-        });*/
+    	.then(function(count) {
+      		expect(res.body).to.have.length.of(count);
+    	});
     });
 
-    it('should return assets with the right values', function() {
+    it('should return assets with the right fields', function() {
       let resAsset;
       return chai.request(app)
-      .get('/asset/get/demo@demo.com')
+      .get(`/asset/get/${testUsername}`)
       .then(function(res) {
-        expect(res).to.have.status(200);
-        expect(res).to.be.json;
-        expect(res.body).to.be.a('array');
-/*        expect(res.body).to.have.length.of.at.least(1);*/
+	    expect(res).to.have.status(200);
+	    expect(res).to.be.json;
+	    expect(res.body).to.be.a('array');
+		expect(res.body).to.have.length.of.at.least(1);
+		
+		res.body.forEach(function (asset) {
+	        expect(asset).to.be.a('object');
+	        expect(asset).to.include.keys('_id','__v' ,'name', 'value', 'target', 'user');
+        });
+        resAsset = res.body[0];
+        return Asset.findById(resAsset.id)
+       });
+    });
+
+  //POST
+  describe('POST ENDPOINT', function() {
+    it('should add new a user', function() {
+      const newUser = generateUserData();
+      console.log(newUser);
+      return chai.request(app)
+        .post('/users/create')
+        .send(newUser)
+        .then(function(res) {
+       	  console.log(res);
+          expect(res).to.have.status(200);
+          expect(res).to.be.json;
+          expect(res.body).to.be.a('object');
+          expect(res.body).to.include.keys('email', 'password', '_id');
+          expect(res.body._id).to.not.be.null;
         });
     });
+  });
+
+
+
   });
 });  

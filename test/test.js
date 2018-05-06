@@ -134,24 +134,72 @@ describe('API resource', function() {
        });
     });
 
-  //POST
+  //POST Create New User
   describe('POST ENDPOINT', function() {
     it('should add new a user', function() {
       const newUser = generateUserData();
-      console.log(newUser);
       return chai.request(app)
         .post('/users/create')
         .send(newUser)
         .then(function(res) {
-       	  console.log(res);
           expect(res).to.have.status(200);
           expect(res).to.be.json;
           expect(res.body).to.be.a('object');
           expect(res.body).to.include.keys('email', 'password', '_id');
+          expect(res.body.email).to.equal(newUser.email);
           expect(res.body._id).to.not.be.null;
         });
     });
   });
+
+    //POST Create New Asset
+  describe('POST ENDPOINT', function() {
+    it('should add new a asset', function() {
+      const newAsset = generateAssetData();
+      return chai.request(app)
+        .post('/asset/create')
+        .send(newAsset)
+        .then(function(res) {
+          expect(res).to.have.status(200);
+          expect(res).to.be.json;
+          expect(res.body).to.be.a('object');
+          expect(res.body).to.include.keys('_id','__v' ,'name', 'value', 'target', 'user');
+          expect(res.body.name).to.equal(newAsset.name);
+          expect(res.body.user).to.equal(newAsset.user);
+          expect(parseInt(res.body.value)).to.equal(newAsset.value);
+          expect(parseInt(res.body.target)).to.equal(newAsset.target);
+          expect(res.body._id).to.not.be.null;
+        });
+    });
+  });
+
+  	describe('PUT endpoint', function() {
+		it('should update fields sent over', function() {
+			const updateData = {
+				name: 'Tesla Stock',
+				value: 9000, 
+				target: 99
+			};
+
+			return Asset
+				.findOne()
+				.then( function(asset) {
+					updateData.id = asset.id;
+					return chai.request(app)
+						.put(`/asset/${asset.id}`)
+						.send(updateData);
+				})
+				.then(function(res) {
+					res.should.have.status(204);
+					return Asset.findById(updateData.id);
+				})
+				.then(function(achievement) {
+/*					achievement.achieveWhat.should.equal(updateData.achieveWhat);
+					achievement.achieveWhy.should.equal(updateData.achieveWhy);*/
+				});
+		});
+	});			
+
 
 
 

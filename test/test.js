@@ -65,12 +65,12 @@ function generateAssetData() {
 //delete entire database
 //ensure data does not stick around for next one
 function tearDownDb() {
-	return new Promise((resolve, reject) => {
+/*	return new Promise((resolve, reject) => {
 		console.warn('Deleting database');
 		mongoose.connection.dropDatabase()
 		  .then(result => resolve(result))
-		  .catch(err => reject(err));
-	});
+		  .catch(err => reject(err));*/
+/*	});*/
 }
 
 
@@ -78,19 +78,19 @@ function tearDownDb() {
 // before and after functions
 describe('API resource', function() {
 	before(function() {
-	return runServer(TEST_DATABASE_URL);
+		return runServer(TEST_DATABASE_URL);
 	});
 
 	beforeEach(function() {
-	return seedAssetData();
+		return seedAssetData();
 	});
 
 	afterEach(function() {
-	return tearDownDb();
+		return tearDownDb();
 	});
 
 	after(function() {
-	return closeServer();
+		return closeServer();
 	});
 
   //GET

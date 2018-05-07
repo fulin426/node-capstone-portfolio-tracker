@@ -118,7 +118,7 @@ li {
 .landing-page-items {
 	width: 100%;
 	position: absolute;
-	top: 40%;
+	top: 20%;
 }
 
 .landing-page-buttons-wrapper {
@@ -150,15 +150,19 @@ li {
 #landing-intro {
     display: block;
     font-weight: bold;
-    font-size: 24px;
-    text-align: center;
-    height: 82px;
+    font-size: 16px;
+    text-align: left;
     width: 48%;
     margin: 5px auto;
     background-color: #429d9d;
     color: white;
-    line-height: 80px;
-    border-radius: 2px
+    /* line-height: 80px; */
+    border-radius: 2px;
+    padding: 1rem;
+}
+
+#landing-intro p {
+	padding-bottom: 1rem;
 }
 
 

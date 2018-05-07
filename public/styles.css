@@ -139,13 +139,28 @@ li {
     font-size: 26px;
     text-align: center;
     height: 98px;
-    width: 86%;
+    width: 50%;
     margin: 0 auto;
     background-color: #429d9d;
     color: white;
     line-height: 100px;
     border-radius: 2px;
 }
+
+#landing-intro {
+    display: block;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+    height: 82px;
+    width: 48%;
+    margin: 5px auto;
+    background-color: #429d9d;
+    color: white;
+    line-height: 80px;
+    border-radius: 2px
+}
+
 
 .landing-button {
 	display: inline-block;

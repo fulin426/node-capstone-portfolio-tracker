@@ -396,6 +396,7 @@ $('.summary-container').on('click', '.analyze-button', function(event) {
 
 //Show edit-delete buttons
 $('.results-container').on('click', '.results-wrapper', function(event) {
+    $('.edit-delete-container').hide();
     $(event.target).closest('.results-item').find('.edit-delete-container').show();
 });
 
